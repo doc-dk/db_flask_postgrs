@@ -79,9 +79,9 @@ class PatientHistoryForm(SectionForm):
     fld_weight_kg = FloatField('Weight (in kg)', [validators.required()])
     fld_diet = SelectField("Diet", choices=PatientHistoryDict.diet_choice)
     fld_diet_other = StringField("Other")
-    fld_alcohol_consumption_form_present = SelectField("Are there symmptoms in the right breast?",
+    fld_alcohol_consumption_form = SelectField("Alcohol Consumtion",
                                                          choices=CommonDict.form_yes_no_choice)
-    right_breast_symptoms_form = FormField(SymptomsRightBreastDurationForm)
+    fld_alcohol_consumption_form = FormField(AlcoholConsumptionForm)
 
 
     #make section form

@@ -1,4 +1,4 @@
-from wtforms import StringField, SelectField, SubmitField, IntegerField
+from wtforms import StringField, TextAreaField, SelectMultipleField, SelectField, SubmitField, IntegerField
 from wtforms.fields.html5 import DateField
 from db_dict.mammography import MammographyDict
 from db_dict.common_dict import CommonDict
@@ -20,6 +20,45 @@ class AbvsForm(BaseForm):
     fld_abvs_diagnosis = SelectField("ABVS Diagnosis", choices=MammographyDict.abvs_diagnosis_choice)
 
 
+class SonoMammographyForm(SectionForm):
+    fld_sonomammography_acc = StringField("Accession number of Sono-Mammography", default=tbd)
+    fld_sonomammography_date = StringField("Date of examination of Sono-mammography", default=tbd)
+    fld_sonomammography_tissue = SelectField("Tissue Composition", choices=MammographyDict.sonomammo_tissue_choice)
+    fld_sonomammography_tissue_other = StringField("Other")
+    fld_sonomammography_calc = SelectField("Is there any calcification reported?", choices=CommonDict.breast_choice)
+    fld_sonomammography_calc_other = StringField("Other")
+    fld_sonomammography_calc_type = SelectField("Calcification location", choices=MammographyDict.sonomammo_calc_choice)
+    fld_sonomammography_calc_type_other = StringField("Other")
+    fld_sonomammography_arch = SelectField("Architectural distortion", choices=CommonDict.breast_choice)
+    fld_sonomammography_arch_other = StringField("Other")
+
+
+    fld_sonomammography_vasc = SelectField("Vascularity", choices=MammographyDict.sonomammo_vascularity_choice)
+    fld_sonomammography_vasc_other = StringField("Other")
+
+    fld_sonomammography_lymph_intra = TextAreaField("Description of intramammary lymph nodes", default=tbd)
+    fld_sonomammography_lymph_ax = SelectField("Axillary Lymph Nodes", choices=CommonDict.normal_abnormal_choice)
+    fld_sonomammography_lymph_ax_other = StringField("Other")
+    fld_sonomammography_lymph_ax_cort = StringField("Cortical thickness of Abnormal Axillary Lymph Nodes", default=tbd)
+    fld_sonomammography_lymph_ax_hilum = SelectField("Abnormal Axillary lymph node hilum",
+                                               choices=MammographyDict.sonomammo_hilum_choice)
+    fld_sonomammography_lymph_ax_hilum_other = StringField("Other")
+    fld_sonomammography_lymph_ax_vasc = SelectField("Abnormal Axillary lymph node vascularity",
+                                              choices=MammographyDict.sonomammo_lymph_ax_vasc_choice)
+    fld_sonomammography_lymph_ax_vasc_other = StringField("Other")
+    fld_sonomammography_sol_duct_loc = SelectField("Location of Solitary Dilated duct", choices=CommonDict.breast_choice)
+    fld_sonomammography_sol_duct_loc_other = StringField("Other")
+    fld_sonomammography_sol_duct_diam = StringField("Diameter of solitary dilated duct (mm)", default=tbd)
+
+    fld_sonomammography_shear = StringField("Strain and shear wave velocity on elastography type/pattern", default=tbd)
+
+    fld_sonomammography_other_findings = SelectMultipleField("Are there any other findings?",
+                                                       choices=MammographyDict.sonomammo_other_findings_choice)
+    fld_sonomammography_other_findings_other = StringField("Other")
+    fld_sono_birad = SelectField("Does the report include a BI-RAfD assessment/Diagnosis?",
+                                 choices=CommonDict.birad_choice)
+    fld_sono_birad_other = StringField("Other")
+    submit_button = SubmitField('Submit Form')
 
 
 class SonoMammoMassForm(SectionForm):
