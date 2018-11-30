@@ -58,6 +58,7 @@ class SymptomsLeftBreastDurationForm(SectionForm):
     fld_ulcer = StringField("ulceration", default = 'absent')
     fld_ecz = StringField("Eczema", default = 'absent')
     submit_button = SubmitField('Submit Form')
+
 class TaboccoExposureForm(BaseForm):
     fld_tobacco = SelectField("Tobacco exposure (Passive and/or Active)", choices=PatientHistoryDict.tobacco_choice)
     fld_tobacco_type_passive = SelectField("Mode of passive consumption",
@@ -73,6 +74,7 @@ class TaboccoExposureForm(BaseForm):
     fld_tobacco_duration = StringField("Duration of tobacco consumption")
     fld_tobacco_comments = StringField("Additional comments for tobacco consumption")
     submit_button = SubmitField('Submit Form')
+
 class PatientHistoryForm(SectionForm):
     fld_med_rec_no = StringField('Medical Record Number') #medical record number is only numbers?shld i put integerfld?
     fld_nam = StringField('Name of the patient')
@@ -100,34 +102,34 @@ class PatientHistoryForm(SectionForm):
 
     fld_tobacco_exposure_form = SelectField("Tobacco Exposure",
                                                choices=CommonDict.form_yes_no_choice)
-    tobacco_exposure_form = FormField(TobaccoExposureForm)
+    tobacco_exposure_form = FormField(TaboccoExposureForm)
 
 
     fld_other_del_habits = StringField("Other Deleterious Habits (if present give details)")
     #added
-    fld_mar_status = StringField("Marital Status")    #add default as Married
-    fld_sib = SelectField("Siblings", choices=CommonDict.yes_no_choice)
-    fld_sib_other = StringField("Other")
-    fld_sis = IntegerField('Number of Sisters') #number , default is 0
-    fld_bro = IntegerField('Number Of Brothers') #number
+    fld_marital_status = StringField("Marital Status")    #add default as Married
+    fld_siblings = SelectField("Siblings", choices=CommonDict.yes_no_choice)
+    fld_siblings_other = StringField("Other")
+    fld_sister = IntegerField('Number of Sisters') #number , default is 0
+    fld_brother = IntegerField('Number Of Brothers') #number
     fld_child = SelectField("Children", choices=CommonDict.yes_no_choice)
     fld_child_other = StringField("Other")
-    fld_dau = IntegerField('Number of Daugthers') #fld is full form
+    fld_daughter = IntegerField('Number of Daugthers') #fld is full form
     fld_son = IntegerField('Number of sons')
     fld_menarche = IntegerField('Age at Menarche')
-    fld_period_typ = SelectField("Period Type", choices=CommonDict.period_type_choice)
-    fld_last_date_per = IntegerField('Date of last menstural Period')
+    fld_period_type = SelectField("Period Type", choices=CommonDict.period_type_choice)
+    fld_last_date_period = IntegerField('Date of last menstural Period')
     fld_menopausal_status = SelectField("Menopausal Status", choices=CommonDict.menopausal_status_choice)
-    fld_meno_age = IntegerField('Age at Menopause')
-    fld_meno_compli = StringField("Complications associated with menopause")
+    fld_menopause_age = IntegerField('Age at Menopause')
+    fld_meno_complications = StringField("Complications associated with menopause")
     fld_pregnancy = IntegerField('Pregnancy carried to term')
-    fld_preg_compli = StringField("Any complications during pregnancy")
-    fld_abort = IntegerField('Number of abortions')
+    fld_pregnancy_complication = StringField("Any complications during pregnancy")
+    fld_abortion = IntegerField('Number of abortions')
     fld_pregnancy_number = IntegerField('Number of pregnancies')
     fld_age_first_child = IntegerField('Age of first child')
     fld_age_first_pregnancy = IntegerField('Age at first pregnancy')
     fld_age_last_pregnancy = IntegerField('Age at last pregnancy')
-    fld_twice_birt_in_year =  StringField("Twice birth in a year(not including twins)")   # is it a yes no question?
+    fld_twice_birth_in_year =  StringField("Twice birth in a year(not including twins)")   # is it a yes no question?
     fld_breast_feed = SelectField("Breast feeding", choices=CommonDict.yes_no_choice)
     #table to be added
 #breast feeding detail table
