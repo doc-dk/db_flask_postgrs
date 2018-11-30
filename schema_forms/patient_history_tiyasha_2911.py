@@ -5,25 +5,35 @@ from db_dict.common_dict import CommonDict
 from datetime import date
 
 class PhysicalActivityForm(SectionForm):
-    # add fld_phsy_act_yes_no
+    fld_phys_act = SectionForm("Physical Activity", choicecs= CommonDict.yes_no_choice)
+    fld_phys_act_other = StringField('Other')
     fld_type_phys_act = StringField("Type of physical activity")
     fld_freq_phys_act = StringField("Frequency of physical activity")
     submit_button = SubmitField('Submit Form')
 
 class NutritionalSupplementsForm(SectionForm):
-    # add fld_phsy_act_yes_no
+    fld_nut_supplements = SectionForm("Nutrition Supplement taken ", choices = CommonDict.yes_no_choice)
+    fld_nut_supplements = StringField("Other")
     fld_nut_supplements_type = StringField("Type of nutritional supplements taken")
     fld_nut_supplements_quant = StringField("Quantity of nutritional supplements taken per day")
     fld_nut_supplements_duration = StringField("Duration of nutritional supplements use")
     submit_button = SubmitField('Submit Form')
 
+class AlcoholConsumptionForm(SectionForm):
+    fld_alcohol = SelectField("Alcohol consumption", choices=CommonDict.yes_no_choice)
+    fld_alcohol_other = StringField("Other")
+    fld_alcohol_age = StringField("Consumption of alcohol from which age (yrs)")
+    fld_alcohol_quant = StringField("Quantity of alcohol consumed per week")
+    fld_alcohol_duration = StringField("Duration of alcohol consumption")
+    fld_alcohol_comments = StringField("Additional comments for alcohol consumption")
+
 class MetastasisSymptomsForm(SectionForm):
     #add to main form
-    fld_bon_pain = SelectField("Bone pain", choices=Common.Dict.yes_no_choice)
-    fld_cough = SelectField("Cough", choices=Common.Dict.yes_no_choice)
-    fld_jaun = SelectField("Jaundice", choices=Common.Dict.yes_no_choice)
-    fld_headache = SelectField("Headache", choices=Common.Dict.yes_no_choice)
-    fld_wei_los = SelectField("Weight loss", choices=Common.Dict.yes_no_choice)
+    fld_bon_pain = SelectField("Bone pain", choices=CommonDict.yes_no_choice)
+    fld_cough = SelectField("Cough", choices=CommonDict.yes_no_choice)
+    fld_jaun = SelectField("Jaundice", choices=CommonDict.yes_no_choice)
+    fld_headache = SelectField("Headache", choices=CommonDict.yes_no_choice)
+    fld_wei_los = SelectField("Weight loss", choices=CommonDict.yes_no_choice)
     submit_button = SubmitField('Submit Form')
 
 class SymptomsRightBreastDurationForm(SectionForm):
@@ -57,25 +67,23 @@ class PatientHistoryForm(SectionForm):
     fld_permanent_address = StringField('Permanent Address')
     fld_current_address = StringField('Current Address', default='Same as Permanent Address')
     fld_contact_number = IntegerField('Contact Number')
-    fld_alt_con = IntegerField('Alternative Contact Number')
-    fld_eml = StringField('e-mail id')
-    fld_occ = StringField('Occupation')
-    fld_gen = StringField('Gender') #add choice
+    fld_alternative_contact = IntegerField('Alternative Contact Number')
+    fld_email = StringField('e-mail id')
+    fld_occupation = StringField('Occupation')
+    fld_gender = SelectField("Gender", choices = CommonDict.gender_choice)
     fld_age = IntegerField('Current Age (yrs)', default = 50)
     #fld_age_diagnosis = IntegerField('Age at diagnosis (yrs)', [validators.required()]) # current age or age of diagnosis?
-    fld_dob = IntegerField('Date Of Birth (DD/MM/YYYY)') #add datefield
-    fld_pob = StringField('Place Of Birth')
+    fld_date_of_birth = DateField('Date Of Birth (DD/MM/YYYY)',default = date.today())
+    fld_place_of_birth = StringField('Place Of Birth')
     fld_height_cm = FloatField('Height (in cm)', [validators.required()])
     fld_weight_kg = FloatField('Weight (in kg)', [validators.required()])
     fld_diet = SelectField("Diet", choices=PatientHistoryDict.diet_choice)
     fld_diet_other = StringField("Other")
-    #make section form
-    fld_alcohol = SelectField("Alcohol consumption", choices=CommonDict.yes_no_choice)
-    fld_alcohol_other = StringField("Other")
-    fld_alcohol_age = StringField("Consumption of alcohol from which age (yrs)")
-    fld_alcohol_quant = StringField("Quantity of alcohol consumed per week")
-    fld_alcohol_duration = StringField("Duration of alcohol consumption")
-    fld_alcohol_comments = StringField("Additional comments for alcohol consumption")
+    fld_alcohol_consumption_form_present = SelectField("Are there symmptoms in the right breast?",
+                                                         choices=CommonDict.form_yes_no_choice)
+    right_breast_symptoms_form = FormField(SymptomsRightBreastDurationForm)
+
+
     #make section form
     fld_tobacco = SelectField("Tobacco exposure (Passive and/or Active)", choices=PatientHistoryDict.tobacco_choice)
     fld_tobacco_type_passive = SelectField("Mode of passive consumption",
