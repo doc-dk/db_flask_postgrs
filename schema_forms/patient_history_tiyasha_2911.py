@@ -38,7 +38,6 @@ class SymptomsRightBreastDurationForm(SectionForm):
     submit_button = SubmitField('Submit Form')
 
 class SymptomsLeftBreastDurationForm(SectionForm):
-
     fld_pain_tender = StringField("Pain or tenderness", default = 'absent')#same fld name?
     fld_lump = StringField("Lumps", default = 'absent')
     fld_nip_dis = StringField("Nipple Discharge", default = 'absent')
@@ -132,10 +131,12 @@ class PatientHistoryForm(SectionForm):
     #current symptoms table
     #SymptomsRightBreastDurationForm yes no question
     #cxhange variabel name
-    fld_right_breast_symptoms_form_present = SelectField("Has 3D Tomosynthesis been done for the patient?",
+    fld_right_breast_symptoms_form_present = SelectField("Are there symmptoms in the right breast?",
                                                              choices=CommonDict.form_yes_no_choice)
     right_breast_symptoms_form = FormField(SymptomsRightBreastDurationForm)
-    #todo left breast
+    fld_left_breast_symptoms_form_present = SelectField("Are there symmptoms in the left breast?",
+                                                         choices=CommonDict.form_yes_no_choice)
+    left_breast_symptoms_form = FormField(SymptomsLeftBreastDurationForm)
     fld_curr_comp = SelectField("Current complains detected by", choices=PatientHistoryDict.current_complain_choice)
     fld_duration_curr_comp = StringField("Duration of current complains")
     fld_metastasis_symptoms = SelectMultipleField("Metastasis Symptoms", choices=PatientHistoryDict.metastasis_symptoms_choice)
