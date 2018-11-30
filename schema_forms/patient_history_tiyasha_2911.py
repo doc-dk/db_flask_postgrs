@@ -5,27 +5,28 @@ from db_dict.common_dict import CommonDict
 from datetime import date
 
 class PhysicalActivityForm(SectionForm):
-    fld_phys_act = SectionForm("Physical Activity", choicecs= CommonDict.yes_no_choice)
+    fld_phys_act = SelectField("Physical Activity", choices= CommonDict.yes_no_choice)
     fld_phys_act_other = StringField('Other')
     fld_type_phys_act = StringField("Type of physical activity")
     fld_freq_phys_act = StringField("Frequency of physical activity")
     submit_button = SubmitField('Submit Form')
 
 class NutritionalSupplementsForm(SectionForm):
-    fld_nut_supplements = SectionForm("Nutrition Supplement taken ", choices = CommonDict.yes_no_choice)
+    fld_nut_supplements = SelectField("Nutrition Supplement taken ", choices = CommonDict.yes_no_choice)
     fld_nut_supplements = StringField("Other")
     fld_nut_supplements_type = StringField("Type of nutritional supplements taken")
     fld_nut_supplements_quant = StringField("Quantity of nutritional supplements taken per day")
     fld_nut_supplements_duration = StringField("Duration of nutritional supplements use")
     submit_button = SubmitField('Submit Form')
 
-class AlcoholConsumptionForm(SectionForm):
+class AlcoholConsumptionForm(BaseForm):
     fld_alcohol = SelectField("Alcohol consumption", choices=CommonDict.yes_no_choice)
     fld_alcohol_other = StringField("Other")
     fld_alcohol_age = StringField("Consumption of alcohol from which age (yrs)")
     fld_alcohol_quant = StringField("Quantity of alcohol consumed per week")
     fld_alcohol_duration = StringField("Duration of alcohol consumption")
     fld_alcohol_comments = StringField("Additional comments for alcohol consumption")
+    submit_button = SubmitField('Submit Form')
 
 class MetastasisSymptomsForm(SectionForm):
     #add to main form

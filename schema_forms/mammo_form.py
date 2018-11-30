@@ -17,8 +17,10 @@ class MammoMassForm(SectionForm):
     fld_loc_left_breast = SelectField("Location of mass in Left Breast",
                                       choices=MammographyDict.mammo_mass_location_left_breast_choice)
     fld_loc_left_breast_other = StringField("Other")
-    fld_dist = SelectField("Distance of mass from nipple", choices=MammographyDict.mammo_mass_dist_choice)
+    fld_dist = StringField("Distance of mass from nipple(cm)")
     fld_dist_other = StringField("Other")
+    fld_dim_mass = StringField("Dimension of mass(cm)")
+    fld_dim_mass_other = StringField("other")
 
     fld_shape = SelectField("Shape of mass", choices=MammographyDict.mammo_mass_shape_choice)
     fld_shape_other = StringField("Other")
