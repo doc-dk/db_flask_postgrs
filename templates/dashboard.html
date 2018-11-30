@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Folder Information</h1>
+    <small>Welcome {{session.name}}</small>
+    <div></div>
+    <a class="btn btn-success" href="folder/add_folder">Register New Folder</a>
+    <hr>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Folder Number</th>
+            <th>Folder Description</th>
+            <th>Form Status</th>
+            <th>Last Update</th>
+            <th></th>
+        </tr>
+        {% for folder in folders %}
+            <tr>
+                <td data-toggle="tooltip" title={{folder.folder_pk}}>{{folder.folder_number}}</td>
+                <td>{{folder.folder_description}}</td>
+                <td>{{folder.form_status}}</td>
+                <td>{{folder.last_update}}</td>
+                <td><a href="folder/view_folder/{{folder.folder_pk}}" class="btn btn-primary pullright">View</a>
+                    <a href="folder/edit/{{folder.folder_pk}}" class="btn btn-secondary pullright">Edit</a>
+                    <a href="folder/delete/{{folder.folder_pk}}" class="btn btn-warning pullright">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
