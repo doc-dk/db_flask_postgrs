@@ -3,7 +3,7 @@ from wtforms.fields.html5 import DateField
 from db_dict.mammography import MammographyDict
 from db_dict.common_dict import CommonDict
 from schema_forms.form_utilities import BaseForm, SectionForm
-from schema_forms.usg import TomosynthesisForm, AbvsForm
+from schema_forms.usg import AbvsForm
 
 
 class MammoMassForm(SectionForm):
@@ -21,7 +21,6 @@ class MammoMassForm(SectionForm):
     fld_dist_other = StringField("Other")
     fld_dim_mass = StringField("Dimension of mass(cm)")
     fld_dim_mass_other = StringField("other")
-
     fld_shape = SelectField("Shape of mass", choices=MammographyDict.mammo_mass_shape_choice)
     fld_shape_other = StringField("Other")
     fld_margin = SelectField("Margins of mass", choices=MammographyDict.mammo_mass_margin_choice)
@@ -30,9 +29,6 @@ class MammoMassForm(SectionForm):
 
 
 class MammoCalcificationForm(SectionForm):
-    def get_summary(self):
-        return "fld-number: " + str(self.fld_number.data)
-
     fld_number = IntegerField("Group of calcification", default=1)
     fld_loc_right_breast = SelectField("Location of calcification in Right Breast",
                                        choices=MammographyDict.mammo_calc_location_right_breast_choice)
@@ -46,9 +42,6 @@ class MammoCalcificationForm(SectionForm):
 
 
 class MammographyForm(SectionForm):
-    def get_summary(self):
-        return self.fld_mammo_location.data
-
     fld_mammo_location = SelectField('Mammography Diagnosis at', choices=MammographyDict.mammo_location_choice)
     fld_mammo_date = DateField("Date of mammography")
     fld_mammo_indication = TextAreaField("Indication for mammography: ")
