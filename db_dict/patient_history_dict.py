@@ -17,7 +17,7 @@ class PatientHistoryDict():
     yes_no_dict = {'tbd': "To be filled", "N": "No", "Y": "Yes", 'other': "Other"}
     current_complain_dict = {'self':"Self",'physician':"Physician",'screening_camp_id':"Screening Camp ID",'other':"Other"}
     annual_income_dict = {'1':"0-2.5lacks",'2':"2.5-5lacks",'3':"5-10lacks",'4':"more than 10 lacks"}
-    metastasis_symptoms_dict = {'tbd': "To be filled", 'N': 'Absent', 'Rest of symptoms': 'TBD'}
+    metastasis_symptoms_dict = {'tbd': "To be filled", 'N': "Absent", 'jauncice':"Jaundice", 'bone pain':"Bone Pain", 'cough':"Cough",'weight loss':"Weight Loss",'headache':"Headache" }
     #todo
     diet_choice = CommonDict.generate_choice(diet_dict)
     tobacco_choice = CommonDict.generate_choice(tobacco_dict)
