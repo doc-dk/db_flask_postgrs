@@ -4,7 +4,7 @@ from passlib.hash import sha256_crypt
 from log import Log
 from dbs.foldersdb import FoldersDb
 from dbs.userdb import UserDb
-from schema_forms.patient_history import PatientHistoryForm, PhysicalActivityForm, NutritionalSupplementsForm
+from schema_forms.patient_history import PatientHistoryForm, PhysicalActivityForm, NutritionalSupplementsForm, MedicalHistoryForm, PatientCancerHistoryForm, FamilyHistoryForm
 from schema_forms.biopsy_form import BiopsyForm
 from schema_forms.surgery_block_form import SurgeryForm
 from schema_forms.mammo_form import MammographyForm, MammoMassForm, MammoCalcificationForm
@@ -115,7 +115,14 @@ patient_history_nut_supp_db = SectionDb(log, NutritionalSupplementsForm, 'nutrit
 patient_history_nut_supp_db.connect(url)
 patient_history_nut_supp_crudprint = construct_crudprint('nutritional_supplements', patient_history_nut_supp_db, folder_db)
 app.register_blueprint(patient_history_nut_supp_crudprint, url_prefix="/nutritional_supplements")
+#
+medical_history_db = SectionDb(log, MedicalHistoryForm, 'medical_history')
+medical_history_db.connect(url)
+medical_history_crudprint = construct_crudprint('medical_history', medical_history_db, folder_db)
+app.register_blueprint(medical_history_crudprint, url_prefix="/medical_history")
 
+
+#
 #########################################################
 # Login, registration and index
 @app.route('/')
