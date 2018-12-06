@@ -116,10 +116,10 @@ patient_history_nut_supp_db.connect(url)
 patient_history_nut_supp_crudprint = construct_crudprint('nutritional_supplements', patient_history_nut_supp_db, folder_db)
 app.register_blueprint(patient_history_nut_supp_crudprint, url_prefix="/nutritional_supplements")
 #
-medical_history_db = SectionDb(log, MedicalHistoryForm, 'medical_history')
-medical_history_db.connect(url)
-medical_history_crudprint = construct_crudprint('medical_history', medical_history_db, folder_db)
-app.register_blueprint(medical_history_crudprint, url_prefix="/medical_history")
+medical_history_form_db = SectionDb(log, MedicalHistoryForm, 'medical_history_form')
+medical_history_form_db.connect(url)
+medical_history_form_crudprint = construct_crudprint('medical_history', medical_history_form_db, folder_db)
+app.register_blueprint(medical_history_form_crudprint, url_prefix="/medical_history_form")
 
 
 #

@@ -23,7 +23,7 @@ class MedicalHistoryForm(SectionForm):
 class FamilyHistoryForm(SectionForm):
     fld_type_of_cancer = StringField('Type of Cancer', default=tbd)
     fld_degree_of_relation = SelectField("Degree of relation", choices= PatientHistoryDict.degree_of_relation_choice)
-    #todo other
+    fld_degree_of_relation_other = ("Other")
     fld_type_of_relation = StringField("Type of Relation", default=tbd)
     fld_age_at_diagnosis = IntegerField("Age at Diagnosis", default=0)
     submit_button = SubmitField('Submit Form')
