@@ -10,7 +10,7 @@ class AlcoholConsumptionForm(BaseForm):
     fld_alcohol_quant = StringField("Quantity of alcohol consumed per week", default=tbd)
     fld_alcohol_duration = StringField("Duration of alcohol consumption", default=tbd)
     fld_alcohol_comments = StringField("Additional comments for alcohol consumption", default=tbd)
-    submit_button = SubmitField('Submit Form')
+
 
 class TaboccoExposureForm(BaseForm):
     fld_tobacco_active_passive = SelectField("Tobacco exposure (Passive and/or Active)", choices=PatientHistoryDict.tobacco_choice)
@@ -27,7 +27,7 @@ class TaboccoExposureForm(BaseForm):
     fld_tobacco_quant = StringField("Quantity of tobacco consumed per week", default=tbd)
     fld_tobacco_duration = StringField("Duration of tobacco consumption", default=tbd)
     fld_tobacco_comments = StringField("Additional comments for tobacco consumption", default=tbd)
-    submit_button = SubmitField('Submit Form')
+
 
 class SymptomsRightBreastDurationForm(BaseForm):
     fld_pain_tender = StringField("Pain or tenderness", default = 'absent')
@@ -73,13 +73,13 @@ class PatientHistoryForm(SectionForm):
     fld_weight_kg = FloatField('Weight (in kg)', [validators.required()])
     fld_diet = SelectField("Diet", choices=PatientHistoryDict.diet_choice)
     fld_diet_other = StringField("Other", default=tbd)
-    fld_alcohol_consumption_form = SelectField("Alcohol Consumtion",
+    fld_nutrition_supplement = SelectField("Nutritional Supplement taken?", choices=CommonDict.yes_no_choice)
+    fld_physical_activity = SelectField("Any physical activity done?", choices=CommonDict.yes_no_choice)
+    fld_alcohol_consumption_form_present = SelectField("Alcohol Consumtion",
                                                          choices=CommonDict.form_yes_no_choice)
-    fld_alcohol_consumption_form_other = StringField('Other')
     alcohol_consumption_form = FormField(AlcoholConsumptionForm)
-    fld_tobacco_exposure_form = SelectField("Tobacco Exposure",
+    fld_tobacco_exposure_form_present = SelectField("Has the patient been exposed to tobacco?",
                                                choices=CommonDict.form_yes_no_choice)
-    fld_tobacco_exposure_form_other = StringField('Other')
     tobacco_exposure_form = FormField(TaboccoExposureForm)
     fld_other_del_habits = StringField("Other Deleterious Habits (if present give details)")
     fld_marital_status = StringField("Marital Status", default = 'married')
@@ -117,7 +117,9 @@ class PatientHistoryForm(SectionForm):
     fld_birth_control = StringField("Type of birth control used", default=tbd)
     fld_detail_birth_control = StringField("Detail of birth control used", default=tbd)
     fld_duration_birth_control = StringField("Duration of birth control used", default=tbd)
-    #other medical history table
+    fld_cancer_history = SelectField("Diagnosed with cancer earlier?", choices=CommonDict.yes_no_choice)
+    fld_family_cancer = SelectField("Any family member been detected with cancer?", choices=CommonDict.yes_no_choice)
+    fld_medical_history = SelectField("Diagnosed with any other disease?", choices=CommonDict.yes_no_choice)
     fld_right_breast_symptoms_form_present = SelectField("Are there symmptoms in the right breast?",
                                                              choices=CommonDict.form_yes_no_choice)
     fld_right_breast_symptoms_form_present_other = StringField('Other')
