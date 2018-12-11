@@ -106,15 +106,10 @@ patient_history_db.connect(url)
 patient_history_crudprint = construct_crudprint('patient_history', patient_history_db, folder_db)
 app.register_blueprint(patient_history_crudprint, url_prefix="/patient_history")
 
-patient_history_phys_act_db = SectionDb(log, PhysicalActivityForm, 'physical_activity')
-patient_history_phys_act_db.connect(url)
-patient_history_phys_act_crudprint = construct_crudprint('physical_activity', patient_history_phys_act_db, folder_db)
-app.register_blueprint(patient_history_phys_act_crudprint, url_prefix="/physical_activity")
 
-patient_history_nut_supp_db = SectionDb(log, NutritionalSupplementsForm, 'nutritional_supplements')
-patient_history_nut_supp_db.connect(url)
-patient_history_nut_supp_crudprint = construct_crudprint('nutritional_supplements', patient_history_nut_supp_db, folder_db)
-app.register_blueprint(patient_history_nut_supp_crudprint, url_prefix="/nutritional_supplements")
+
+
+
 
 #########################################################
 # Login, registration and index

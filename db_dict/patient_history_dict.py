@@ -27,4 +27,5 @@ class PatientHistoryDict():
     annual_income_choice = CommonDict.generate_choice(annual_income_dict)
     period_type_choice = CommonDict.generate_choice(period_type_dict)
     menopausal_status_choice = CommonDict.generate_choice(menopausal_status_dict)
+    menopausal_status_choice = CommonDict.generate_choice(menopausal_status_dict)
     metastasis_symptoms_choice = CommonDict.generate_choice(metastasis_symptoms_dict)

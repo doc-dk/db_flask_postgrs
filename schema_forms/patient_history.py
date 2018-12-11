@@ -4,6 +4,21 @@ from db_dict.patient_history_dict import PatientHistoryDict
 from db_dict.common_dict import CommonDict
 from datetime import date
 
+class NutritionalSupplementsForm(BaseForm):
+    fld_nut_supplements = SelectField("Nutrition Supplement taken ", choices = CommonDict.yes_no_choice)
+    fld_nut_supplements_other = StringField("Other")
+    fld_nut_supplements_type = StringField("Type of nutritional supplements taken")
+    fld_nut_supplements_quant = StringField("Quantity of nutritional supplements taken per day")
+    fld_nut_supplements_duration = StringField("Duration of nutritional supplements use")
+    submit_button = SubmitField('Submit Form')
+
+class PhysicalActivityForm(BaseForm):
+    fld_phys_act = SelectField("Physical Activity", choices= CommonDict.yes_no_choice)
+    fld_phys_act_other = StringField('Other')
+    fld_type_phys_act = StringField("Type of physical activity")
+    fld_freq_phys_act = StringField("Frequency of physical activity")
+    submit_button = SubmitField('Submit Form')
+
 class AlcoholConsumptionForm(BaseForm):
     fld_alcohol_age = StringField("Consumption of alcohol from which age (yrs)")
     fld_alcohol_quant = StringField("Quantity of alcohol consumed per week")
@@ -70,6 +85,12 @@ class PatientHistoryForm(SectionForm):
     fld_weight_kg = FloatField('Weight (in kg)', [validators.required()])
     fld_diet = SelectField("Diet", choices=PatientHistoryDict.diet_choice)
     fld_diet_other = StringField("Other")
+    fld_nutrition_supplement_form_present = SelectField("Nutrition supplements taken?",
+                                                         choices=CommonDict.form_yes_no_choice)
+    nutrition_supplement_form = FormField(NutritionalSupplementsForm)
+    fld_physical_activity_form_present = SelectField("Physical Activity done?",
+                                                        choices=CommonDict.form_yes_no_choice)
+    physical_activity_form = FormField(PhysicalActivityForm)
     fld_alcohol_consumption_form = SelectField("Alcohol Consumtion",
                                                          choices=CommonDict.form_yes_no_choice)
     alcohol_consumption_form = FormField(AlcoholConsumptionForm)
@@ -85,7 +106,7 @@ class PatientHistoryForm(SectionForm):
     fld_brother = IntegerField('Number Of Brothers', default = 0)
     fld_child = SelectField("Children", choices=CommonDict.yes_no_choice)
     fld_child_other = StringField("Other")
-    fld_daughter = IntegerField('Number of Daugthers', default = 0)
+    fld_daughter = IntegerField('Number of Daughter', default = 0)
     fld_son = IntegerField('Number of sons', default = 0)
     fld_menarche = IntegerField('Age at Menarche', default = 50)
     fld_period_type = SelectField("Period Type", choices=CommonDict.period_type_choice)
@@ -125,17 +146,4 @@ class PatientHistoryForm(SectionForm):
     fld_ann_hou_inc = SelectField("Annual house income is", choice=PatientHistoryDict.annual_income_choice)
     submit_button = SubmitField('Submit Form')
 
-class PhysicalActivityForm(SectionForm):
-    fld_phys_act = SelectField("Physical Activity", choices= CommonDict.yes_no_choice)
-    fld_phys_act_other = StringField('Other')
-    fld_type_phys_act = StringField("Type of physical activity")
-    fld_freq_phys_act = StringField("Frequency of physical activity")
-    submit_button = SubmitField('Submit Form')
 
-class NutritionalSupplementsForm(SectionForm):
-    fld_nut_supplements = SelectField("Nutrition Supplement taken ", choices = CommonDict.yes_no_choice)
-    fld_nut_supplements_other = StringField("Other")
-    fld_nut_supplements_type = StringField("Type of nutritional supplements taken")
-    fld_nut_supplements_quant = StringField("Quantity of nutritional supplements taken per day")
-    fld_nut_supplements_duration = StringField("Duration of nutritional supplements use")
-    submit_button = SubmitField('Submit Form')
