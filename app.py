@@ -107,16 +107,6 @@ patient_history_db.connect(url)
 patient_history_crudprint = construct_crudprint('patient_history', patient_history_db, folder_db)
 app.register_blueprint(patient_history_crudprint, url_prefix="/patient_history")
 
-patient_history_phys_act_db = SectionDb(log, PhysicalActivityForm, 'physical_activity')
-patient_history_phys_act_db.connect(url)
-patient_history_phys_act_crudprint = construct_crudprint('physical_activity', patient_history_phys_act_db, folder_db)
-app.register_blueprint(patient_history_phys_act_crudprint, url_prefix="/physical_activity")
-
-patient_history_nut_supp_db = SectionDb(log, NutritionalSupplementsForm, 'nutritional_supplements')
-patient_history_nut_supp_db.connect(url)
-patient_history_nut_supp_crudprint = construct_crudprint('nutritional_supplements', patient_history_nut_supp_db, folder_db)
-app.register_blueprint(patient_history_nut_supp_crudprint, url_prefix="/nutritional_supplements")
-
 patient_cancer_history_db = SectionDb(log, PatientCancerHistoryForm, 'patient_cancer_history')
 patient_cancer_history_db.connect(url)
 patient_cancer_history_crudprint = construct_crudprint('patient_cancer_history',patient_cancer_history_db , folder_db)
@@ -267,11 +257,7 @@ def view_folder(folder_pk):
         ]
     elif active_tab_id == "PatientHistory":
         folder_sections = [
-            create_folder_section(folder_pk, "patient_history", "patient_history", patient_history_db.get_folder_items),
-            create_folder_section(folder_pk, "physical_activity", "physical_activity",
-                                  patient_history_phys_act_db.get_folder_items, is_list=True),
-            create_folder_section(folder_pk, "nutritional_supplements", "nutritional_supplements",
-                                  patient_history_nut_supp_db.get_folder_items, is_list=True),
+            create_folder_section(folder_pk, "patient_history","patient_history",patient_history_db.get_folder_items),
             create_folder_section(folder_pk, "patient_cancer_history","patient_cancer_history",
                                   patient_cancer_history_db.get_folder_items, is_list = True),
             create_folder_section(folder_pk,"medical_history","medical_history"
