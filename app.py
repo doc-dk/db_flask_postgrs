@@ -107,14 +107,6 @@ patient_history_db.connect(url)
 patient_history_crudprint = construct_crudprint('patient_history', patient_history_db, folder_db)
 app.register_blueprint(patient_history_crudprint, url_prefix="/patient_history")
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
->>>>>>> 3a90879e5d4caae951a77bba8da0d8ec0485f5cb
 patient_cancer_history_db = SectionDb(log, PatientCancerHistoryForm, 'patient_cancer_history')
 patient_cancer_history_db.connect(url)
 patient_cancer_history_crudprint = construct_crudprint('patient_cancer_history',patient_cancer_history_db , folder_db)
