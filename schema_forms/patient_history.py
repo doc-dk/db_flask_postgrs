@@ -1,9 +1,23 @@
-from wtforms import StringField, validators, IntegerField, FloatField, SubmitField, SelectField, SelectMultipleField, DateField, FormField
+from wtforms import StringField, validators, IntegerField, FloatField, SubmitField, TextAreaField, SelectField, \
+    SelectMultipleField, DateField, FormField
 from schema_forms.form_utilities import SectionForm, BaseForm
 from db_dict.patient_history_dict import PatientHistoryDict
 from db_dict.common_dict import CommonDict
 from datetime import date
 
+class NutritionalSupplementsForm(BaseForm):
+    fld_nut_supplements_type = TextAreaField("Type of nutritional supplements taken(Separate with ; between different "
+                                             "supplements)")
+    fld_nut_supplements_quant = StringField("Quantity of nutritional supplements taken per day")
+    fld_nut_supplements_duration = StringField("Duration of nutritional supplements use")
+    submit_button = SubmitField('Submit Form')
+
+class PhysicalActivityForm(BaseForm):
+    fld_type_phys_act = StringField("Type of physical activity")
+    fld_freq_phys_act = StringField("Frequency of physical activity")
+    submit_button = SubmitField('Submit Form')
+
+=======
 tbd = 'To be filled'
 class NutritionalSupplementsForm(BaseForm):
     fld_nut_supplements_type = StringField("Type of nutritional supplements taken", default=tbd)
@@ -22,9 +36,15 @@ class AlcoholConsumptionForm(BaseForm):
     fld_alcohol_duration = StringField("Duration of alcohol consumption", default=tbd)
     fld_alcohol_comments = StringField("Additional comments for alcohol consumption", default=tbd)
 
+<<<<<<< HEAD
 
 class TobaccoExposureForm(BaseForm):
     fld_tobacco_active_passive = SelectField("Tobacco exposure (Passive and/or Active)", choices=PatientHistoryDict.tobacco_choice)
+=======
+class TobaccoExposureForm(BaseForm):
+    fld_tobacco_active_passive = SelectField("Tobacco exposure (Passive and/or Active)",
+                                             choices=PatientHistoryDict.tobacco_choice)
+>>>>>>> 3a90879e5d4caae951a77bba8da0d8ec0485f5cb
     fld_tobacco_active_passive_other = StringField('Other')
     fld_tobacco_type_passive = SelectField("Mode of passive consumption",
                                            choices=PatientHistoryDict.tobacco_type_passive_choice)
@@ -44,11 +64,19 @@ class SymptomsRightBreastDurationForm(BaseForm):
     fld_pain_tender = StringField("Pain or tenderness", default='absent')
     fld_lump = StringField("Lumps", default='absent')
     fld_nip_dis = StringField("Nipple Discharge", default='absent')
+<<<<<<< HEAD
     fld_nip_ret = StringField("Nipple retraction", default='absent')
     fld_dim = StringField("Dimpling", default='absent')
     fld_discol = StringField("Discoloration", default='absent')
     fld_ulcer = StringField("ulceration", default='absent')
     fld_ecz = StringField("Eczema", default='absent')
+=======
+    fld_nip_ret = StringField("Nipple retraction", default = 'absent')
+    fld_dim = StringField("Dimpling", default = 'absent')
+    fld_discol = StringField("Discoloration", default = 'absent')
+    fld_ulcer = StringField("ulceration", default = 'absent')
+    fld_ecz = StringField("Eczema", default = 'absent')
+>>>>>>> 3a90879e5d4caae951a77bba8da0d8ec0485f5cb
     submit_button = SubmitField('Submit Form')
 
 class SymptomsLeftBreastDurationForm(BaseForm):
@@ -75,6 +103,22 @@ class PatientHistoryForm(SectionForm):
     fld_email = StringField('e-mail id', default=tbd)
     fld_occupation = StringField('Occupation', default=tbd)
     fld_gender = SelectField("Gender", choices = CommonDict.gender_choice)
+    fld_age = IntegerField('Current Age (yrs)', default = 50)
+    #todo format date.today() to dd/mm/yyyy
+    fld_date_of_birth = DateField('Date Of Birth (DD/MM/YYYY)',default=date.today())
+    fld_place_of_birth = StringField('Place Of Birth')
+    fld_height_feet = StringField('Height (in feet eg., 5ft 2in) ', default='0ft 0in')
+    fld_weight_kg = FloatField('Weight (in kg)', [validators.required()])
+    fld_diet = SelectField("Diet", choices=PatientHistoryDict.diet_choice)
+    fld_diet_other = StringField("Other")
+    fld_nutrition_supplement_form_present = SelectField("Nutrition supplements taken?",
+                                                         choices=CommonDict.form_yes_no_choice)
+    nutrition_supplement_form = FormField(NutritionalSupplementsForm)
+    fld_physical_activity_form_present = SelectField("Physical Activity done?",
+                                                        choices=CommonDict.form_yes_no_choice)
+    physical_activity_form = FormField(PhysicalActivityForm)
+    #todo phys act should be text area field with comment on sep
+    fld_alcohol_consumption_form = SelectField("Alcohol Consumtion",
     fld_gender_other = StringField('Other')
     fld_age = IntegerField('Current Age (yrs)', default=0)
     fld_date_of_birth = DateField('Date Of Birth (YYYY/MM/DD)',default=date.today())
@@ -101,6 +145,7 @@ class PatientHistoryForm(SectionForm):
     fld_brother = IntegerField('Number Of Brothers', default=0)
     fld_child = SelectField("Children", choices=CommonDict.yes_no_choice)
     fld_child_other = StringField("Other")
+<<<<<<< HEAD
     fld_daughter = IntegerField('Number of Daugthers', default=0)
     fld_son = IntegerField('Number of sons', default=0)
     fld_menarche = IntegerField('Age at Menarche', default=0)
@@ -112,6 +157,17 @@ class PatientHistoryForm(SectionForm):
     fld_menopause_age = IntegerField('Age at Menopause', default=0)
     fld_menopause_complications = StringField("Complications associated with menopause", default=tbd)
     fld_pregnancy = IntegerField('Pregnancy carried to term', default=0)
+=======
+    fld_daughter = IntegerField('Number of Daughter', default = 0)
+    fld_son = IntegerField('Number of sons', default = 0)
+    fld_menarche = IntegerField('Age at Menarche', default = 0)
+    fld_period_type = SelectField("Period Type", choices=CommonDict.period_type_choice)
+    fld_last_date_period = DateField('Date of last menstural Period', default=date.today())
+    fld_menopausal_status = SelectField("Menopausal Status", choices=CommonDict.menopausal_status_choice)
+    fld_menopause_age = IntegerField('Age at Menopause', default = 50)
+    fld_menopause_complications = StringField("Complications associated with menopause")
+    fld_pregnancy = IntegerField('Pregnancy carried to term', default = 0)
+>>>>>>> 3a90879e5d4caae951a77bba8da0d8ec0485f5cb
     fld_pregnancy_complication = StringField("Any complications during pregnancy", default=tbd)
     fld_abortion = IntegerField('Number of abortions', default=0)
     fld_pregnancy_number = IntegerField('Number of pregnancies', default=0)
@@ -147,7 +203,11 @@ class PatientHistoryForm(SectionForm):
     fld_metastasis_symptoms_other = StringField('Other')
     fld_annual_income = SelectField("Annual house income is", choices=PatientHistoryDict.annual_income_choice)
     fld_annual_income_other = StringField('Other')
+<<<<<<< HEAD
     submit_button = SubmitField('Submit Form')
 
 
 
+=======
+    submit_button = SubmitField('Submit Form')
+>>>>>>> 3a90879e5d4caae951a77bba8da0d8ec0485f5cb
