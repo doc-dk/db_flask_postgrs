@@ -18,6 +18,15 @@ class ClinicalExamForm(SectionForm):
 
     fld_palpable_lump_form_present = SelectField("Palpable lump in the breast?", choices=CommonDict.form_yes_no_choice)
     palpable_lump_form = FormField(PalpableLumpForm)
+    fld_lump_size = SelectField("Lump Size", choices=ClinicalExamDict.lump_size_choice)
+    fld_lump_size_other = StringField("Other")
+    fld_limp_number = SelectField("Number of lump", choices=ClinicalExamDict.lump_number_choice)
+    fld_lump_number_other = StringField("Other")
+    fld_lump_consistency = SelectField("Consistency of lumps", choices=ClinicalExamDict.lump_consistency_dict)# should it be multiple select?
+    fld_fixity = SelectField("Lump fixity to",choices=ClinicalExamDict.lump_fixity_choice)
+    fld_fixity_other = StringField("Other")
+    
+
 
     submit_button = SubmitField('Submit Form')
 
