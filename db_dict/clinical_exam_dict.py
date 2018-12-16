@@ -14,7 +14,11 @@ class ClinicalExamDict():
     lump_fixity_dict = {'tbd':"To be filled",'skin':"Skin",'chest wall':"Chest_Wall",
                         'Pectoral_major_muscle':"Pectoral major muscle",'no_fixation':"No fixation",'other':"Other"}
     metastasis_type_dict = {'tbd':"To be filled",'diffuse':"Diffuse",'sectoral':"Sectoral",'other':"Other"}
-    discharge_type_dict = {'tbd':"To be filled",'milky':"Milky",'serous':"Serous",'brown':"Brown",'blood':"Blood",'other':"Other"}
+    discharge_type_dict = {'tbd':"To be filled",'milky':"Milky",'serous':"Serous",'brown':"Brown",'blood':"Blood",
+                           'other':"Other"}
+    skin_change_type_dict = {'tbd':"To be filled",'dimpling':"Dimpling",'ulceration':"Ulceration",
+                             'discoloration':"Discoloration",'eczema':"Eczema",'edema':"Edema",'redness':"Redness",
+                             'peau d orange':"Peau d'orange",'other':"Other"}
 
     options_choice = CommonDict.generate_choice(options_dict)
     lump_size_choice = CommonDict.generate_choice(lump_size_dict)
@@ -23,3 +27,4 @@ class ClinicalExamDict():
     lump_fixity_choice = CommonDict.generate_choice(lump_fixity_dict)
     metastasis_type_choice = CommonDict.generate_choice(metastasis_type_dict)
     discharge_type_choice = CommonDict.generate_choice(discharge_type_dict)
+    skin_change_type_choice = CommonDict.generate_choice(skin_change_type_dict)

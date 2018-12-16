@@ -1,4 +1,4 @@
-from wtforms import StringField, IntegerField, SubmitField, SelectField, SelectMultipleField, validators, TextAreaField, FormField
+from wtforms import StringField, IntegerField, SubmitField, SelectField, SelectMultipleField, validators, TextAreaField, FormField, FloatField
 from schema_forms.form_utilities import SectionForm, BaseForm
 from db_dict.common_dict import CommonDict
 from db_dict.clinical_exam_dict import ClinicalExamDict
@@ -29,9 +29,34 @@ class NippleDischargeForm(BaseForm):
     fld_discharge_type = SelectField("Type of discharge", choices=ClinicalExamDict.metastasis_type_choice)
     fld_discharge_type_other = StringField("Other")
     submit_button = SubmitField('Submit Form')
+
+class SkinChangeForm(BaseForm):
+    fld_skin_change_location = SelectField("Location of skin change", choices=CommonDict.breast_choice)
+    fld_skin_change_location_other = StringField("Other")
+    fld_skin_change_type = SelectField("Type of skin change", choices=ClinicalExamDict.skin_change_type_choice)
+    fld_skin_change_type_other = StringField("Other")
+    submit_button = SubmitField('Submit Form')
+
+class PalpableAxillaryNodeForm(BaseForm):
+    fld_palpable_axillary_node_location = SelectField("Palpable axillary Node present in", choices=CommonDict.breast_choice)
+    fld_palpable_axillary_node_location_other = StringField("Other")
+    fld_axillary_node_number = IntegerField("Number of node", default=0)
+    fld_axillary_node_size = FloatField("Size of node", default=0.0 )
+    fld_axillary_node_fixity = SelectField("Fixity of axillary nodes", choices=CommonDict.yes_no_choice)
+    fld_axillary_node_fixity_other = StringField("Other")
+    submit_button = SubmitField('Submit Form')
+
+class SupraClavicularNodeForm(BaseForm):
+    fld_supraclavicular_node_location = SelectField("Location of supraclavicular node", choices=CommonDict.breast_choice)
+    fld_supraclavicular_node_location_other = StringField("Other")
+    fld_supraclavicular_node_number = IntegerField("Number of supraclavicular node", default=0)
+    fld_supraclavicular_node_size = FloatField("Size of supraclavicular node", default=0.0)
+    fld_supraclavicular_node_fixity = SelectField("Supraclavicular node fixity?", choices=CommonDict.yes_no_choice)
+    fld_supraclavicular_node_fixity_other = StringField("Other")
+    submit_button = SubmitField('Submit Form')
+
 class ClinicalExamForm(SectionForm):
     fld_provisional_diagnosis = StringField("Provisional diagnosis", default=tbd)
-
     fld_palpable_lump_form_present = SelectField("Palpable lump in the breast?", choices=CommonDict.form_yes_no_choice)
     palpable_lump_form = FormField(PalpableLumpForm)
     fld_lump_size = SelectField("Lump Size", choices=ClinicalExamDict.lump_size_choice)
@@ -49,6 +74,13 @@ class ClinicalExamForm(SectionForm):
     fld_retract_other = StringField("Other")
     fld_discharge_form_present = SelectField("Nipple discharge", choices=CommonDict.yes_no_choice)
     discharge_form = FormField(NippleDischargeForm)
+    fld_skin_change_form_present = SelectField("Any skin changes?", choices=CommonDict.yes_no_choice)
+    skin_change_form = FormField(SkinChangeForm)
+    fld_palpable_axillary_node_form_present = SelectField("Palpable Axillary Node?",choices=CommonDict.yes_no_choice)
+    palpable_axillary_node_form = FormField(PalpableAxillaryNodeForm)
+    fld_supraclavicular_node_form_present = SelectField("Palpable supraclavicular nodes", choices=CommonDict.yes_no_choice)
+    supraclavicular_node_form = FormField(SupraClavicularNodeForm)
+
 
 
 
