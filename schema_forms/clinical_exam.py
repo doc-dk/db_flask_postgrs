@@ -7,12 +7,28 @@ tbd = 'To be filled'
 
 class PalpableLumpForm(BaseForm):
     fld_palpable_lump = SelectMultipleField("The palpable lump is ", choices=ClinicalExamDict.options_choice)
+    fld_palpable_lump_other = StringField("Other")
     fld_breast_lump = SelectMultipleField("The lump is present in", choices=CommonDict.breast_choice)
+    fld_breast_lump_other = StringField("Other")
     fld_lump_localisation = SelectMultipleField("location of lump", choices=CommonDict.breast_location_choice)
     fld_lump_localisation_other = StringField("Other")
     submit_button = SubmitField('Submit Form')
 
+class MetastasisForm(BaseForm):
+    fld_metastasis_breast = SelectField("Metastasis in", choices=CommonDict.breast_choice)
+    fld_metastasis_breast_other = StringField("Other")
+    fld_metastasis_location = SelectField("Location of metastasis", choices=CommonDict.breast_location_choice)
+    fld_metastasis_location_other = StringField("Other")
+    fld_metastasis_type = SelectField("Type of metastasis", choices=ClinicalExamDict.metastasis_type_choice)
+    fld_metastasis_type_other = StringField("Other")
+    submit_button = SubmitField('Submit Form')
 
+class NippleDischargeForm(BaseForm):
+    fld_discharge = SelectField("Nipple discharge seen in?",choices=CommonDict.breast_choice)
+    fld_discharge_other = StringField("Other")
+    fld_discharge_type = SelectField("Type of discharge", choices=ClinicalExamDict.metastasis_type_choice)
+    fld_discharge_type_other = StringField("Other")
+    submit_button = SubmitField('Submit Form')
 class ClinicalExamForm(SectionForm):
     fld_provisional_diagnosis = StringField("Provisional diagnosis", default=tbd)
 
@@ -25,7 +41,17 @@ class ClinicalExamForm(SectionForm):
     fld_lump_consistency = SelectField("Consistency of lumps", choices=ClinicalExamDict.lump_consistency_dict)# should it be multiple select?
     fld_fixity = SelectField("Lump fixity to",choices=ClinicalExamDict.lump_fixity_choice)
     fld_fixity_other = StringField("Other")
-    
+    fld_metastasis_form_present = SelectField("Metastasis", choices=CommonDict.form_yes_no_choice)
+    metastasis_form = FormField(MetastasisForm)
+    fld_tender = SelectField("Tenderness in breast?", choices=CommonDict.breast_choice)
+    fld_tender_other = StringField("Other")
+    fld_retract = SelectField("Niplle retraction?", choices=CommonDict.breast_choice)
+    fld_retract_other = StringField("Other")
+    fld_discharge_form_present = SelectField("Nipple discharge", choices=CommonDict.yes_no_choice)
+    discharge_form = FormField(NippleDischargeForm)
+
+
+
 
 
     submit_button = SubmitField('Submit Form')
