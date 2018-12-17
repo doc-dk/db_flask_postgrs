@@ -19,6 +19,10 @@ class ClinicalExamDict():
     skin_change_type_dict = {'tbd':"To be filled",'dimpling':"Dimpling",'ulceration':"Ulceration",
                              'discoloration':"Discoloration",'eczema':"Eczema",'edema':"Edema",'redness':"Redness",
                              'peau d orange':"Peau d'orange",'other':"Other"}
+    contalateral_breast_dict = {'tbd':"To be filled",'normal':"Normal",'diffuse mastitis':"diffuse mastitis",
+                                 'Localised Mastitis':"Localised Mastitis", 'other':"Other"}
+    arm_edema_dict = {'tbd':"To be filled",'right':"Right",'left':"Left",'not present':"Not present",'both':"Both",
+                      'other':"Other"}
 
     options_choice = CommonDict.generate_choice(options_dict)
     lump_size_choice = CommonDict.generate_choice(lump_size_dict)
@@ -28,3 +32,5 @@ class ClinicalExamDict():
     metastasis_type_choice = CommonDict.generate_choice(metastasis_type_dict)
     discharge_type_choice = CommonDict.generate_choice(discharge_type_dict)
     skin_change_type_choice = CommonDict.generate_choice(skin_change_type_dict)
+    contalateral_breast_choice = CommonDict.generate_choice(contalateral_breast_dict)
+    arm_edema_choice = CommonDict.generate_choice(arm_edema_dict)

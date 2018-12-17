@@ -70,7 +70,7 @@ class ClinicalExamForm(SectionForm):
     metastasis_form = FormField(MetastasisForm)
     fld_tender = SelectField("Tenderness in breast?", choices=CommonDict.breast_choice)
     fld_tender_other = StringField("Other")
-    fld_retract = SelectField("Niplle retraction?", choices=CommonDict.breast_choice)
+    fld_retract = SelectField("Nipple retraction?", choices=CommonDict.breast_choice)
     fld_retract_other = StringField("Other")
     fld_discharge_form_present = SelectField("Nipple discharge", choices=CommonDict.yes_no_choice)
     discharge_form = FormField(NippleDischargeForm)
@@ -80,6 +80,17 @@ class ClinicalExamForm(SectionForm):
     palpable_axillary_node_form = FormField(PalpableAxillaryNodeForm)
     fld_supraclavicular_node_form_present = SelectField("Palpable supraclavicular nodes", choices=CommonDict.yes_no_choice)
     supraclavicular_node_form = FormField(SupraClavicularNodeForm)
+    fld_contralateral_breast = SelectField("Contralateral Breast", choices=ClinicalExamDict.contalateral_breast_choice)
+    fld_contralateral_breast_other = StringField("Other")
+    fld_arm_edema = SelectField("Edema of arm",choices=ClinicalExamDict.arm_edema_choice)
+    fld_arm_edema_other = StringField("Other")
+    fld_arm_circ_right = FloatField("Circumference of right arm(cm)", default=0)
+    fld_arm_vol_right = FloatField("Upper limb volume - right arm (cc): ",default=0)
+    fld_arm_elbow_right = FloatField("Distance from the elbow - right arm (cm): ",default=0)
+    fld_arm_circ_left = FloatField("Circumference of left arm (cm): ",default=0)
+    fld_arm_vol_left = FloatField("Upper limb volume - left arm (cc): ",default=0)
+    fld_arm_elbow_left = FloatField("Distance from the elbow - left arm (cml): ",default=0)
+    fld_follow_up_advised = StringField("Follow up tests advised for patient:")
 
 
 
