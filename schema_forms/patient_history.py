@@ -89,7 +89,7 @@ class PatientHistoryForm(SectionForm):
     fld_physical_activity_form_present = SelectField("Physical Activity done?",
                                                         choices=CommonDict.form_yes_no_choice)
     physical_activity_form = FormField(PhysicalActivityForm)
-    fld_alcohol_consumption_form = SelectField("Alcohol Consumption",
+    fld_alcohol_consumption_form_present = SelectField("Alcohol Consumption",
                                          choices=CommonDict.form_yes_no_choice)
     alcohol_consumption_form = FormField(AlcoholConsumptionForm)
     fld_tobacco_exposure_form_present = SelectField("Has the patient been exposed to tobacco?",

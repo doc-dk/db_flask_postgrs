@@ -4,7 +4,8 @@ from passlib.hash import sha256_crypt
 from log import Log
 from dbs.foldersdb import FoldersDb
 from dbs.userdb import UserDb
-from schema_forms.patient_history import PatientHistoryForm, PhysicalActivityForm, NutritionalSupplementsForm
+from schema_forms.patient_history import PatientHistoryForm
+from schema_forms.clinical_exam import ClinicalExamForm
 from schema_forms.medical_history_form import MedicalHistoryForm, PatientCancerHistoryForm, FamilyHistoryForm
 from schema_forms.biopsy_form import BiopsyForm
 from schema_forms.surgery_block_form import SurgeryForm
@@ -121,6 +122,11 @@ family_history_db = SectionDb(log, FamilyHistoryForm, 'family_history')
 family_history_db.connect(url)
 family_history_crudprint = construct_crudprint('family_history', family_history_db, folder_db)
 app.register_blueprint(family_history_crudprint, url_prefix="/family_history")
+
+clinical_exam_db = SectionDb(log, ClinicalExamForm, 'clinical_exam')
+clinical_exam_db.connect(url)
+clinical_exam_crudprint = construct_crudprint('clinical_exam', clinical_exam_db, folder_db)
+app.register_blueprint(clinical_exam_crudprint, url_prefix="/clinical_exam")
 #
 #########################################################
 # Login, registration and index
@@ -265,6 +271,10 @@ def view_folder(folder_pk):
             create_folder_section(folder_pk,"family_history","family_history",
                                   family_history_db.get_folder_items, is_list=True),
 
+        ]
+    elif active_tab_id == "ClinicalExam":
+        folder_sections = [
+            create_folder_section(folder_pk, "clinical_exam", "clinical_exam", clinical_exam_db.get_folder_items),
         ]
     elif active_tab_id == "NACT":
         folder_sections = [
