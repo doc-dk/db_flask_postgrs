@@ -4,6 +4,7 @@ from db_dict.mammography import MammographyDict
 from db_dict.common_dict import CommonDict
 from schema_forms.form_utilities import BaseForm, SectionForm
 
+tbd = 'To be filled'
 
 class AbvsForm(BaseForm):
     fld_abvs_date = DateField("Date of examination of ABVS", default=None)

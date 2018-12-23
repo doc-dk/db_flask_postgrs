@@ -2,8 +2,8 @@ from wtforms import StringField, TextAreaField, IntegerField, SelectField, FormF
 from wtforms.fields.html5 import DateField
 from db_dict.mammography import MammographyDict
 from db_dict.common_dict import CommonDict
-from schema_forms.form_utilities import BaseForm, SectionForm
-from schema_forms.usg import TomosynthesisForm, AbvsForm
+from schema_forms.form_utilities import SectionForm
+from schema_forms.usg import AbvsForm
 
 
 class MammoMassForm(SectionForm):
@@ -58,9 +58,9 @@ class MammographyForm(SectionForm):
                                                 choices=MammographyDict.mammo_lesion_right_breast_choice)
     fld_mammo_lesion_left_breast = SelectField("Location of skin lesion on left breast",
                                                choices=MammographyDict.mammo_lesion_left_breast_choice)
-    fld_mammography_tomosynthesis_form_present = SelectField("Has 3D Tomosynthesis been done for the patient?",
-                                                             choices=CommonDict.form_yes_no_choice)
-    mammography_tomosynthesis_form = FormField(TomosynthesisForm)
+    fld_mammography_tomosynthesis = SelectField("Has 3D Tomosynthesis been done for the patient?",
+                                                             choices=CommonDict.yes_no_choice)
+    fld_mammography_tomosynthesis_other = StringField('Other')
     fld_mammo_birad = SelectField("BI-RAD classification (if available)", choices=MammographyDict.mammo_birad_choice)
     fld_mammo_impression = TextAreaField("Input Impression(if available): ")
     fld_mammography_abvs_form_present = SelectField("Has ABVS been done for the patient?",
