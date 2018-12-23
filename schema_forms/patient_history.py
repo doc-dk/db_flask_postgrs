@@ -6,17 +6,16 @@ from db_dict.common_dict import CommonDict
 from datetime import date
 
 tbd = 'To be filled'
+
 class NutritionalSupplementsForm(BaseForm):
     fld_nut_supplements_type = TextAreaField("Type of nutritional supplements taken(Separate with ; between different "
                                              "supplements)", default=tbd)
     fld_nut_supplements_quant = StringField("Quantity of nutritional supplements taken per day", default=tbd)
     fld_nut_supplements_duration = StringField("Duration of nutritional supplements use", default=tbd)
-    submit_button = SubmitField('Submit Form')
 
 class PhysicalActivityForm(BaseForm):
     fld_type_phys_act = TextAreaField("Type of physical activity(separate different physical activity using ;)", default=tbd)
     fld_freq_phys_act = StringField("Frequency of physical activity", default=tbd)
-    submit_button = SubmitField('Submit Form')
 
 class AlcoholConsumptionForm(BaseForm):
     fld_alcohol_age = StringField("Consumption of alcohol from which age (yrs)", default=tbd)
@@ -25,13 +24,14 @@ class AlcoholConsumptionForm(BaseForm):
     fld_alcohol_comments = StringField("Additional comments for alcohol consumption", default=tbd)
 
 class TobaccoExposureForm(BaseForm):
-    fld_tobacco_active_passive = SelectField("Tobacco exposure (Passive and/or Active)", choices=PatientHistoryDict.tobacco_choice)
+    fld_tobacco_active_passive = SelectField("Tobacco exposure (Passive and/or Active)",
+                                             choices=PatientHistoryDict.tobacco_choice)
     fld_tobacco_active_passive_other = StringField('Other')
     fld_tobacco_type_passive = SelectField("Mode of passive consumption",
                                            choices=PatientHistoryDict.tobacco_type_passive_choice)
     fld_tobacco_type_passive_other = StringField("Other")
     fld_tobacco_type_passive_home = StringField("What is the specific source of passive exposure at home",
-                                                default='None')
+                                                default=tbd)
     fld_tobacco_type = SelectMultipleField("Type of tobacco use", choices=PatientHistoryDict.tobacco_type_choice)
     fld_tobacco_type_other = StringField("Other")
     fld_tobacco_age = StringField("Consumption of tobacco from which age (yrs)", default=tbd)
@@ -41,26 +41,24 @@ class TobaccoExposureForm(BaseForm):
     fld_tobacco_comments = StringField("Additional comments for tobacco consumption", default=tbd)
 
 class SymptomsRightBreastDurationForm(BaseForm):
-    fld_pain_tender = StringField("Pain or tenderness", default='absent')
-    fld_lump = StringField("Lumps", default='absent')
-    fld_nip_discharge = StringField("Nipple Discharge", default='absent')
-    fld_nip_retraction = StringField("Nipple retraction", default='absent')
-    fld_dimpling = StringField("Dimpling", default='absent')
-    fld_discoloration = StringField("Discoloration", default='absent')
-    fld_ulcer = StringField("ulceration", default='absent')
-    fld_eczema = StringField("Eczema", default='absent')
-    submit_button = SubmitField('Submit Form')
+    fld_pain_tender_right = SelectField("Pain or tenderness", choices=CommonDict.absent_present_choice)
+    fld_lump_right = SelectField("Lumps", choices=CommonDict.absent_present_choice)
+    fld_nip_discharge_right = SelectField("Nipple Discharge", choices=CommonDict.absent_present_choice)
+    fld_nip_retraction_right = SelectField("Nipple retraction", choices=CommonDict.absent_present_choice)
+    fld_dimpling_right = SelectField("Dimpling", choices=CommonDict.absent_present_choice)
+    fld_discoloration_right = SelectField("Discoloration", choices=CommonDict.absent_present_choice)
+    fld_ulcer_right = SelectField("Ulceration", choices=CommonDict.absent_present_choice)
+    fld_eczema_right = SelectField("Eczema", choices=CommonDict.absent_present_choice)
 
 class SymptomsLeftBreastDurationForm(BaseForm):
-    fld_pain_tender = StringField("Pain or tenderness", default='absent')#same fld name?
-    fld_lump = StringField("Lumps", default='absent')
-    fld_nip_dis = StringField("Nipple Discharge", default='absent')
-    fld_nip_retraction = StringField("Nipple retraction", default='absent')
-    fld_dimpling = StringField("Dimpling", default='absent')
-    fld_discoloration = StringField("Discoloration", default='absent')
-    fld_ulcer = StringField("ulceration", default='absent')
-    fld_eczema = StringField("Eczema", default='absent')
-    submit_button = SubmitField('Submit Form')
+    fld_pain_tender_left = SelectField("Pain or tenderness", choices=CommonDict.absent_present_choice)
+    fld_lump_left = SelectField("Lumps", choices=CommonDict.absent_present_choice)
+    fld_nip_dis_left = SelectField("Nipple Discharge", choices=CommonDict.absent_present_choice)
+    fld_nip_retraction_left = SelectField("Nipple retraction", choices=CommonDict.absent_present_choice)
+    fld_dimpling_left = SelectField("Dimpling", choices=CommonDict.absent_present_choice)
+    fld_discoloration_left = SelectField("Discoloration", choices=CommonDict.absent_present_choice)
+    fld_ulcer_left = SelectField("ulceration", choices=CommonDict.absent_present_choice)
+    fld_eczema_left = SelectField("Eczema", choices=CommonDict.absent_present_choice)
 
 class PatientHistoryForm(SectionForm):
     fld_med_rec_no = StringField('Medical Record Number', default=tbd)
@@ -70,17 +68,17 @@ class PatientHistoryForm(SectionForm):
     fld_first_visit_date = DateField('Date of first visit', default=date.today())
     fld_permanent_address = StringField('Permanent Address', default=tbd)
     fld_current_address = StringField('Current Address', default='Same as Permanent Address')
-    fld_contact_number = IntegerField('Contact Number')
-    fld_alternative_contact = IntegerField('Alternative Contact Number')
+    fld_contact_number = IntegerField('Contact Number', default=999)
+    fld_alternative_contact = IntegerField('Alternative Contact Number', default=999)
     fld_email = StringField('e-mail id', default=tbd)
     fld_occupation = StringField('Occupation', default=tbd)
-    fld_gender = SelectField("Gender", choices = CommonDict.gender_choice)
-    fld_age = IntegerField('Current Age (yrs)', default =0)
+    fld_gender = SelectField("Gender", choices=CommonDict.gender_choice)
+    fld_age = IntegerField('Current Age (yrs)', default =999)
     #todo format date.today() to dd/mm/yyyy
     fld_date_of_birth = DateField('Date Of Birth (yyyy/mm/dd)',default=date.today())
-    fld_place_of_birth = StringField('Place Of Birth')
+    fld_place_of_birth = StringField('Place Of Birth', default=tbd)
     fld_height_feet = StringField('Height (in feet eg., 5ft 2in) ', default='0ft 0in')
-    fld_weight_kg = FloatField('Weight (in kg)', [validators.required()])
+    fld_weight_kg = FloatField('Weight (in kg)', default=999)
     fld_diet = SelectField("Diet", choices=PatientHistoryDict.diet_choice)
     fld_diet_other = StringField("Other")
     fld_nutrition_supplement_form_present = SelectField("Nutrition supplements taken?",
@@ -96,30 +94,31 @@ class PatientHistoryForm(SectionForm):
                                                choices=CommonDict.form_yes_no_choice)
     tobacco_exposure_form = FormField(TobaccoExposureForm)
     fld_other_del_habits = StringField("Other Deleterious Habits (if present give details)")
-    fld_marital_status = StringField("Marital Status", default='married')
+    fld_marital_status = SelectField("Marital Status",choices=PatientHistoryDict.marital_status_choice)
+    fld_marital_status_other = StringField('Other')
     fld_siblings = SelectField("Siblings", choices=CommonDict.yes_no_choice)
     fld_siblings_other = StringField("Other")
-    fld_sister = IntegerField('Number of sisters', default=0)
-    fld_brother = IntegerField('Number Of brothers', default=0)
+    fld_sister = IntegerField('Number of sisters', default=999)
+    fld_brother = IntegerField('Number Of brothers', default=999)
     fld_child = SelectField("Children", choices=CommonDict.yes_no_choice)
     fld_child_other = StringField("Other")
-    fld_daughter = IntegerField('Number of daughters', default=0)
-    fld_son = IntegerField('Number of sons', default=0)
-    fld_menarche = IntegerField('Age at menarche', default=0)
+    fld_daughter = IntegerField('Number of daughters', default=999)
+    fld_son = IntegerField('Number of sons', default=999)
+    fld_menarche = IntegerField('Age at menarche', default=999)
     fld_period_type = SelectField("Period Type", choices=PatientHistoryDict.period_type_choice)
     fld_period_type_other = StringField('Other')
     fld_last_date_period = DateField('Date of last menstrual Period', default=date.today())
     fld_menopausal_status = SelectField("Menopausal Status", choices=PatientHistoryDict.menopausal_status_choice)
     fld_menopausal_status_other = StringField('Other')
-    fld_menopause_age = IntegerField('Age at Menopause', default=0)
+    fld_menopause_age = IntegerField('Age at Menopause', default=999)
     fld_menopause_complications = StringField("Complications associated with menopause", default=tbd)
-    fld_pregnancy = IntegerField('Pregnancy carried to term', default=0)
+    fld_pregnancy = IntegerField('Pregnancy carried to term', default=999)
     fld_pregnancy_complication = StringField("Any complications during pregnancy", default=tbd)
-    fld_abortion = IntegerField('Number of abortions', default=0)
-    fld_pregnancy_number = IntegerField('Number of pregnancies', default=0)
-    fld_age_first_child = IntegerField('Age of first child',default=0)
-    fld_age_first_pregnancy = IntegerField('Age at first pregnancy', default=0)
-    fld_age_last_pregnancy = IntegerField('Age at last pregnancy', default=0)
+    fld_abortion = IntegerField('Number of abortions', default=999)
+    fld_pregnancy_number = IntegerField('Number of pregnancies', default=999)
+    fld_age_first_child = IntegerField('Age of first child',default=999)
+    fld_age_first_pregnancy = IntegerField('Age at first pregnancy', default=999)
+    fld_age_last_pregnancy = IntegerField('Age at last pregnancy', default=999)
     fld_twice_birth_in_year =  SelectField("Twice birth in a year(not including twins)", choices=CommonDict.yes_no_choice)
     fld_breast_feed = SelectField("Breast feeding", choices=CommonDict.yes_no_choice)
     fld_fertility_treat = SelectField("Fertility Treatment", choices=CommonDict.yes_no_choice)
@@ -140,7 +139,6 @@ class PatientHistoryForm(SectionForm):
     right_breast_symptoms_form = FormField(SymptomsRightBreastDurationForm)
     fld_left_breast_symptoms_form_present = SelectField("Are there symptoms in the left breast?",
                                                          choices=CommonDict.form_yes_no_choice)
-    fld_left_breast_symptoms_form_present_other = StringField('Other')
     left_breast_symptoms_form = FormField(SymptomsLeftBreastDurationForm)
     fld_complain_detected_by = SelectField("Current complains detected by", choices=PatientHistoryDict.current_complain_choice)
     fld_complain_detected_by_other = StringField('Other')

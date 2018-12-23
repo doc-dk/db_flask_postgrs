@@ -29,6 +29,7 @@ class PatientHistoryDict():
                            'none': "None", 'other': "Other"}
     degree_of_relation_dict = {'tbd':"To be filled",'i':"Immediate Family",'m':"Maternal Family",'p':"Paternal Family",
                                'other':"Other"}
+    marital_status_dict = {'tbd':"To be filled",'married':"Married",'single':"Single", 'other':"Other"}
     diet_choice = CommonDict.generate_choice(diet_dict)
     tobacco_choice = CommonDict.generate_choice(tobacco_dict)
     tobacco_type_passive_choice = CommonDict.generate_choice(tobacco_type_passive_dict)
@@ -40,3 +41,4 @@ class PatientHistoryDict():
     metastasis_symptoms_choice = CommonDict.generate_choice(metastasis_symptoms_dict)
     treatment_type_choice = CommonDict.generate_choice(treatment_type_dict)
     degree_of_relation_choice = CommonDict.generate_choice(degree_of_relation_dict)
+    marital_status_choice = CommonDict.generate_choice(marital_status_dict)
