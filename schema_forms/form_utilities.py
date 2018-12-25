@@ -26,10 +26,10 @@ class BsonWrapper:
 def to_bson(form, prefix = 'fld_'):
     
     # handle 'other' fields (_other suffix)
-    other_list = [x for x in dir(form) if x.endswith('other')]
+    other_list = [x for x in dir(form) if x.endswith('_other')]
     for other in other_list:
         if  form[other[:-len('_other')]].data != 'other':
-            form[other].data = form[other[:-6]].data
+            form[other].data = form[other[:-len('_other')]].data
     
     # handle normal fields (prefix fld_)
     field_list = [a for a in dir(form) if a.startswith(prefix)]
