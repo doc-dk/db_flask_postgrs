@@ -4,9 +4,8 @@ from passlib.hash import sha256_crypt
 from log import Log
 from dbs.foldersdb import FoldersDb
 from dbs.userdb import UserDb
-from schema_forms.patient_history import PatientHistoryForm
+from schema_forms.patient_history import PatientHistoryForm, PhysicalActivityForm, NutritionalSupplementsForm
 from schema_forms.medical_history_form import MedicalHistoryForm, PatientCancerHistoryForm, FamilyHistoryForm
-from schema_forms.clinical_exam import ClinicalExamForm
 from schema_forms.biopsy_form import BiopsyForm
 from schema_forms.surgery_block_form import SurgeryForm
 from schema_forms.mammo_form import MammographyForm, MammoMassForm, MammoCalcificationForm
@@ -30,7 +29,7 @@ url = None
 if url is None:
     url = 'mongodb://localhost:27017'
 url = url.replace('"', '')
-print('Using db at: '+url)
+print('Using db at: ' + url)
 
 port = os.getenv('PORT')
 port = None
@@ -44,7 +43,7 @@ db.connect(url)
 users_db = UserDb(log)
 users_db.connect(url)
 
-#Initialize section DBs
+# Initialize section DBs
 app = Flask(__name__)
 Bootstrap(app)
 
@@ -108,9 +107,20 @@ patient_history_db.connect(url)
 patient_history_crudprint = construct_crudprint('patient_history', patient_history_db, folder_db)
 app.register_blueprint(patient_history_crudprint, url_prefix="/patient_history")
 
+patient_history_phys_act_db = SectionDb(log, PhysicalActivityForm, 'physical_activity')
+patient_history_phys_act_db.connect(url)
+patient_history_phys_act_crudprint = construct_crudprint('physical_activity', patient_history_phys_act_db, folder_db)
+app.register_blueprint(patient_history_phys_act_crudprint, url_prefix="/physical_activity")
+
+patient_history_nut_supp_db = SectionDb(log, NutritionalSupplementsForm, 'nutritional_supplements')
+patient_history_nut_supp_db.connect(url)
+patient_history_nut_supp_crudprint = construct_crudprint('nutritional_supplements', patient_history_nut_supp_db,
+                                                         folder_db)
+app.register_blueprint(patient_history_nut_supp_crudprint, url_prefix="/nutritional_supplements")
+
 patient_cancer_history_db = SectionDb(log, PatientCancerHistoryForm, 'patient_cancer_history')
 patient_cancer_history_db.connect(url)
-patient_cancer_history_crudprint = construct_crudprint('patient_cancer_history',patient_cancer_history_db , folder_db)
+patient_cancer_history_crudprint = construct_crudprint('patient_cancer_history', patient_cancer_history_db, folder_db)
 app.register_blueprint(patient_cancer_history_crudprint, url_prefix="/patient_cancer_history")
 
 medical_history_db = SectionDb(log, MedicalHistoryForm, 'medical_history')
@@ -123,10 +133,7 @@ family_history_db.connect(url)
 family_history_crudprint = construct_crudprint('family_history', family_history_db, folder_db)
 app.register_blueprint(family_history_crudprint, url_prefix="/family_history")
 
-clinical_exam_db = SectionDb(log, ClinicalExamForm, 'clinical_exam')
-clinical_exam_db.connect(url)
-clinical_exam_crudprint = construct_crudprint('clinical_exam', clinical_exam_db, folder_db)
-app.register_blueprint(clinical_exam_crudprint, url_prefix="/clinical_exam")
+
 #
 #########################################################
 # Login, registration and index
@@ -134,18 +141,18 @@ app.register_blueprint(clinical_exam_crudprint, url_prefix="/clinical_exam")
 def index():
     return render_template('home.html')
 
+
 @app.route('/about')
 def about():
     return render_template('about.html')
+
 
 class RegisterForm(Form):
     name = StringField('Name', [validators.Length(min=1, max=50)])
     username = StringField('Username', [validators.Length(min=4, max=25)])
     email = StringField('Email', [validators.Length(min=6, max=50)])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match')
-    ])
+    password = PasswordField('Password', [validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match')])
     confirm = PasswordField('Confirm Password')
 
 
@@ -189,6 +196,7 @@ def login():
         return name
     return render_template('login.html')
 
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -203,13 +211,16 @@ def logout():
 def dashboard():
     folder_list = db.get_folders()
     if folder_list:
-        return render_template('dashboard.html', folders = folder_list)
+        return render_template('dashboard.html', folders=folder_list)
     else:
         msg = 'No data found'
-        return render_template('dashboard.html', msg = msg)
+        return render_template('dashboard.html', msg=msg)
+
 
 #########################################################
-    # Folder CRUD
+# Folder CRUD
+
+
 ######################
 # Folder
 @app.route('/search', methods=['POST'])
@@ -232,7 +243,7 @@ def view_folder(folder_pk):
         flash(folder_pk + ' not found', 'danger')
         return redirect(url_for('dashboard'))
 
-# select active tab
+    # select active tab
     active_tab_id = request.args.get('active_tab')
     if active_tab_id is None:
         if 'active_tab' in session:
@@ -244,58 +255,37 @@ def view_folder(folder_pk):
     # set up sections
     folder_sections = []
     if active_tab_id == "Radiology":
-        folder_sections = [
-            create_folder_section(folder_pk, "mammo","mammo", mammo_db.get_folder_items),
-            create_folder_section(folder_pk,  "mammo_mass","mammo_mass", mammo_mass_db.get_folder_items, is_list=True),
-            create_folder_section(folder_pk,  "mammo_calcification", "mammo_calcification",
+        folder_sections = [create_folder_section(folder_pk, "mammo", "mammo", mammo_db.get_folder_items),
+            create_folder_section(folder_pk, "mammo_mass", "mammo_mass", mammo_mass_db.get_folder_items, is_list=True),
+            create_folder_section(folder_pk, "mammo_calcification", "mammo_calcification",
                                   mammo_calcification_db.get_folder_items, is_list=True),
-            create_folder_section(folder_pk,  "usg", "usg", usg_db.get_folder_items),
-            create_folder_section(folder_pk,  "usg_mass","usg_mass", usg_mass_db.get_folder_items, is_list=True), ]
+            create_folder_section(folder_pk, "usg", "usg", usg_db.get_folder_items),
+            create_folder_section(folder_pk, "usg_mass", "usg_mass", usg_mass_db.get_folder_items, is_list=True), ]
     elif active_tab_id == "Biopsy":
-        folder_sections = [
-            create_folder_section(folder_pk, "biopsy", "biopsy", biopsy_db.get_folder_items),
-        ]
+        folder_sections = [create_folder_section(folder_pk, "biopsy", "biopsy", biopsy_db.get_folder_items), ]
     elif active_tab_id == "Surgery":
-        folder_sections = [
-            create_folder_section(folder_pk, "surgery", "surgery", surgery_db.get_folder_items),
-        ]
+        folder_sections = [create_folder_section(folder_pk, "surgery", "surgery", surgery_db.get_folder_items), ]
     elif active_tab_id == "PatientHistory":
         folder_sections = [
-            create_folder_section(folder_pk, "patient_history","patient_history",patient_history_db.get_folder_items),
-            create_folder_section(folder_pk, "patient_cancer_history","patient_cancer_history",
-                                  patient_cancer_history_db.get_folder_items, is_list = True),
-            create_folder_section(folder_pk,"medical_history","medical_history"
-                                  ,medical_history_db.get_folder_items, is_list=True),
-            create_folder_section(folder_pk,"family_history","family_history",
-                                  family_history_db.get_folder_items, is_list=True),
-
-        ]
-    elif active_tab_id == "ClinicalExam":
-        folder_sections = [
-            create_folder_section(folder_pk, "clinical_exam", "clinical_exam", clinical_exam_db.get_folder_items),
-        ]
+            create_folder_section(folder_pk, "patient_history", "patient_history", patient_history_db.get_folder_items),
+            create_folder_section(folder_pk, "physical_activity", "physical_activity",
+                                  patient_history_phys_act_db.get_folder_items, is_list=True),
+            create_folder_section(folder_pk, "nutritional_supplements", "nutritional_supplements",
+                                  patient_history_nut_supp_db.get_folder_items, is_list=True), ]
     elif active_tab_id == "NACT":
-        folder_sections = [
-            create_folder_section(folder_pk, "nact", "nact", nact_db.get_folder_items),
+        folder_sections = [create_folder_section(folder_pk, "nact", "nact", nact_db.get_folder_items),
             create_folder_section(folder_pk, "nact_drug", "nact_drug", nact_drug_db.get_folder_items, is_list=True),
             create_folder_section(folder_pk, "nact_toxicity", "nact_toxicity", nact_toxicity_db.get_folder_items,
                                   is_list=True), ]
 
-    folder_tabs = [        
-        ("PatientHistory", "Patient History"),
-        ("ClinicalExam", "Clinical Exam"),
-        ("Radiology", "Radiology"),
-        ("Biopsy", "Biopsy"),
-        ("NACT", "NeoAdjuvant Chemotherapy"),
-        ("Surgery", "Surgery"),
-        ("AdjuvantChemo", "Adjuvant Chemotherapy"),
-        ("Radiotherapy", "Radiotherapy"),
-        ("LongTermTherapy", "LongTerm Therapy"),
-        ("FollowUp", "Follow-up"),
-    ]
+    folder_tabs = [("PatientHistory", "Patient History"), ("ClinicalExam", "Clinical Exam"), ("Radiology", "Radiology"),
+        ("Biopsy", "Biopsy"), ("NACT", "NeoAdjuvant Chemotherapy"), ("Surgery", "Surgery"),
+        ("AdjuvantChemo", "Adjuvant Chemotherapy"), ("Radiotherapy", "Radiotherapy"),
+        ("LongTermTherapy", "LongTerm Therapy"), ("FollowUp", "Follow-up"), ]
 
-    return render_template('folder_tabs.html', folder_number = folder_number, key = folder_pk,
-                            folder_sections=folder_sections, folder_tabs=folder_tabs, active_tab_id=active_tab_id)
+    # key = folder_pk
+    return render_template('folder_tabs.html', folder_number=folder_number, key=folder_pk,
+                           folder_sections=folder_sections, folder_tabs=folder_tabs, active_tab_id=active_tab_id)
 
 
 def create_folder_section(folder_pk, id, section_name, db_get, is_list=False):

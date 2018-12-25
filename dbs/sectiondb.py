@@ -14,6 +14,7 @@ class SectionDb(object):
         self.form_class = form_class
         self.db_name = 'bcdb'
         self.collection_name = 'folders'
+        #todo whereis doc_type defined???
         self.doc_type = collection_name
 
     def get_from_request(self, request_data):

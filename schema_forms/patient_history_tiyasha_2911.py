@@ -13,15 +13,13 @@ class PhysicalActivityForm(SectionForm):
 
 class NutritionalSupplementsForm(SectionForm):
     fld_nut_supplements = SelectField("Nutrition Supplement taken ", choices = CommonDict.yes_no_choice)
-    fld_nut_supplements = StringField("Other")
+    fld_nut_supplements_other = StringField("Other")
     fld_nut_supplements_type = StringField("Type of nutritional supplements taken")
     fld_nut_supplements_quant = StringField("Quantity of nutritional supplements taken per day")
     fld_nut_supplements_duration = StringField("Duration of nutritional supplements use")
     submit_button = SubmitField('Submit Form')
 
 class AlcoholConsumptionForm(BaseForm):
-
-
     fld_alcohol_age = StringField("Consumption of alcohol from which age (yrs)")
     fld_alcohol_quant = StringField("Quantity of alcohol consumed per week")
     fld_alcohol_duration = StringField("Duration of alcohol consumption")
@@ -37,7 +35,7 @@ class MetastasisSymptomsForm(SectionForm):
     fld_wei_los = SelectField("Weight loss", choices=CommonDict.yes_no_choice)
     submit_button = SubmitField('Submit Form')
 
-class SymptomsRightBreastDurationForm(SectionForm):
+class SymptomsRightBreastDurationForm(BaseForm):
     fld_pain_tender = StringField("Pain or tenderness", default = 'absent')
     fld_lump = StringField("Lumps", default = 'absent')
     fld_nip_dis = StringField("Nipple Discharge", default = 'absent')
@@ -48,7 +46,7 @@ class SymptomsRightBreastDurationForm(SectionForm):
     fld_ecz = StringField("Eczema", default = 'absent')
     submit_button = SubmitField('Submit Form')
 
-class SymptomsLeftBreastDurationForm(SectionForm):
+class SymptomsLeftBreastDurationForm(BaseForm):
     fld_pain_tender = StringField("Pain or tenderness", default = 'absent')#same fld name?
     fld_lump = StringField("Lumps", default = 'absent')
     fld_nip_dis = StringField("Nipple Discharge", default = 'absent')
@@ -155,8 +153,6 @@ class PatientHistoryForm(SectionForm):
     fld_curr_comp = SelectField("Current complains detected by", choices=PatientHistoryDict.current_complain_choice)
     fld_duration_curr_comp = StringField("Duration of current complains")
     fld_metastasis_symptoms = SelectMultipleField("Metastasis Symptoms", choices=PatientHistoryDict.metastasis_symptoms_choice)
-
-    #table to be added
     fld_ann_hou_inc = SelectField("Annual house income is", choice=PatientHistoryDict.annual_income_choice)
     submit_button = SubmitField('Submit Form')
 
