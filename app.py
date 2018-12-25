@@ -5,8 +5,8 @@ from log import Log
 from dbs.foldersdb import FoldersDb
 from dbs.userdb import UserDb
 from schema_forms.patient_history import PatientHistoryForm
-from schema_forms.clinical_exam import ClinicalExamForm
 from schema_forms.medical_history_form import MedicalHistoryForm, PatientCancerHistoryForm, FamilyHistoryForm
+from schema_forms.clinical_exam import ClinicalExamForm
 from schema_forms.biopsy_form import BiopsyForm
 from schema_forms.surgery_block_form import SurgeryForm
 from schema_forms.mammo_form import MammographyForm, MammoMassForm, MammoCalcificationForm
@@ -210,8 +210,6 @@ def dashboard():
 
 #########################################################
     # Folder CRUD
-
- 
 ######################
 # Folder
 @app.route('/search', methods=['POST'])
@@ -296,9 +294,9 @@ def view_folder(folder_pk):
         ("FollowUp", "Follow-up"),
     ]
 
-    #key = folder_pk
-    return render_template('folder_tabs.html', folder_number = folder_number, key = folder_pk, folder_sections=folder_sections,
-                            folder_tabs=folder_tabs, active_tab_id=active_tab_id)
+    return render_template('folder_tabs.html', folder_number = folder_number, key = folder_pk,
+                            folder_sections=folder_sections, folder_tabs=folder_tabs, active_tab_id=active_tab_id)
+
 
 def create_folder_section(folder_pk, id, section_name, db_get, is_list=False):
     forms = db_get(folder_pk)
@@ -307,17 +305,16 @@ def create_folder_section(folder_pk, id, section_name, db_get, is_list=False):
     last_modified_on = [datetime.datetime.today().strftime('%Y-%m-%d')]
     update_by = [""]
     pks = None
-    if forms is not None and len(forms) >0:
+    if forms is not None and len(forms) > 0:
         action = "edit"
         status = [x.fld_form_status.data for x in forms]
         last_modified_on = [x.last_update.data for x in forms]
         pks = [(x.fld_pk.data, x.get_summary()) for x in forms]
         update_by = [x.update_by.data for x in forms]
 
-    section = FolderSection(id, section_name, action, status, forms, folder_pk, last_modified_on = last_modified_on,
+    section = FolderSection(id, section_name, action, status, forms, folder_pk, last_modified_on=last_modified_on,
                             last_modified_by=update_by, pks=pks, is_list=is_list)
     return section
-
 
 
 # MAIN
