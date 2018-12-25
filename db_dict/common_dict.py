@@ -38,7 +38,7 @@ class CommonDict():
     normal_abnormal_dict = {'tbd':"To be filled",'no':'Not Present in Report','normal':"Normal", 'abnormal':"Abnormal"}
     postive_negative_dict = {'tbd':"To be filled","pos":"Positive", "neg": "Negative", 'report': 'Not mentioned in Report',
                                   'other': 'Other'}
-    gender_dict = {'tbd':"To be filled",'female':"Female",'male':"Male",'other':"other"}
+    gender_dict = {'tbd':"To be filled",'female':"Female",'male':"Male",'other':"Other"}
     breast_location_choice = generate_choice(breast_location_dict)
     birad_choice = generate_choice(birad_dict)
     yes_no_choice = generate_choice(yes_no_dict)

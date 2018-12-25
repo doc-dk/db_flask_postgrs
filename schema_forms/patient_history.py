@@ -1,5 +1,6 @@
-from wtforms import StringField, validators, IntegerField, FloatField, SubmitField, TextAreaField, SelectField, \
-    SelectMultipleField, DateField, FormField
+from wtforms import StringField, IntegerField, FloatField, SubmitField, TextAreaField, SelectField, SelectMultipleField,\
+    FormField
+from wtforms.fields.html5 import DateField
 from schema_forms.form_utilities import SectionForm, BaseForm
 from db_dict.patient_history_dict import PatientHistoryDict
 from db_dict.common_dict import CommonDict
@@ -14,7 +15,8 @@ class NutritionalSupplementsForm(BaseForm):
     fld_nut_supplements_duration = StringField("Duration of nutritional supplements use", default=tbd)
 
 class PhysicalActivityForm(BaseForm):
-    fld_type_phys_act = TextAreaField("Type of physical activity(separate different physical activity using ;)", default=tbd)
+    fld_type_phys_act = TextAreaField("Type of physical activity(separate different physical activity using ;)",
+                                      default=tbd)
     fld_freq_phys_act = StringField("Frequency of physical activity", default=tbd)
 
 class AlcoholConsumptionForm(BaseForm):
@@ -22,6 +24,7 @@ class AlcoholConsumptionForm(BaseForm):
     fld_alcohol_quant = StringField("Quantity of alcohol consumed per week", default=tbd)
     fld_alcohol_duration = StringField("Duration of alcohol consumption", default=tbd)
     fld_alcohol_comments = StringField("Additional comments for alcohol consumption", default=tbd)
+
 
 class TobaccoExposureForm(BaseForm):
     fld_tobacco_active_passive = SelectField("Tobacco exposure (Passive and/or Active)",
@@ -40,25 +43,51 @@ class TobaccoExposureForm(BaseForm):
     fld_tobacco_duration = StringField("Duration of tobacco consumption", default=tbd)
     fld_tobacco_comments = StringField("Additional comments for tobacco consumption", default=tbd)
 
+
+class BreastFeedingForm(BaseForm):
+    fld_breast_feeding_children = SelectField("Were all children breast fed?", choices=CommonDict.yes_no_choice)
+    fld_breast_feeding_duration = TextAreaField('Please enter breast feeding duration in months for each child '
+                                                '(in the format Child Number: Breast feed months: Preferred Breast Side; )')
 class SymptomsRightBreastDurationForm(BaseForm):
-    fld_pain_tender_right = SelectField("Pain or tenderness", choices=CommonDict.absent_present_choice)
-    fld_lump_right = SelectField("Lumps", choices=CommonDict.absent_present_choice)
-    fld_nip_discharge_right = SelectField("Nipple Discharge", choices=CommonDict.absent_present_choice)
-    fld_nip_retraction_right = SelectField("Nipple retraction", choices=CommonDict.absent_present_choice)
-    fld_dimpling_right = SelectField("Dimpling", choices=CommonDict.absent_present_choice)
-    fld_discoloration_right = SelectField("Discoloration", choices=CommonDict.absent_present_choice)
-    fld_ulcer_right = SelectField("Ulceration", choices=CommonDict.absent_present_choice)
-    fld_eczema_right = SelectField("Eczema", choices=CommonDict.absent_present_choice)
+    fld_pain_tender_right = SelectField("Pain or tenderness", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_pain_tender_right_other = StringField("Duration")
+    fld_lump_right = SelectField("Lumps", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_lump_right_other = StringField("Duration")
+    fld_nipple_discharge_right = SelectField("Nipple Discharge",
+                                             choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_nipple_discharge_right_other = StringField("Duration")
+    fld_nipple_retraction_right = SelectField("Nipple retraction",
+                                              choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_nipple_retraction_right_other = StringField("Duration")
+    fld_dimpling_right = SelectField("Dimpling", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_dimpling_right_other = StringField("Duration")
+    fld_discoloration_right = SelectField("Discoloration", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_discoloration_right_other = StringField("Duration")
+    fld_ulcer_right = SelectField("Ulceration", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_ulcer_right_other = StringField("Duration")
+    fld_eczema_right = SelectField("Eczema", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_eczema_right_other = StringField("Duration")
+
 
 class SymptomsLeftBreastDurationForm(BaseForm):
-    fld_pain_tender_left = SelectField("Pain or tenderness", choices=CommonDict.absent_present_choice)
-    fld_lump_left = SelectField("Lumps", choices=CommonDict.absent_present_choice)
-    fld_nip_dis_left = SelectField("Nipple Discharge", choices=CommonDict.absent_present_choice)
-    fld_nip_retraction_left = SelectField("Nipple retraction", choices=CommonDict.absent_present_choice)
-    fld_dimpling_left = SelectField("Dimpling", choices=CommonDict.absent_present_choice)
-    fld_discoloration_left = SelectField("Discoloration", choices=CommonDict.absent_present_choice)
-    fld_ulcer_left = SelectField("ulceration", choices=CommonDict.absent_present_choice)
-    fld_eczema_left = SelectField("Eczema", choices=CommonDict.absent_present_choice)
+    fld_pain_tender_left = SelectField("Pain or tenderness", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_pain_tender_left_other = StringField("Duration")
+    fld_lump_left = SelectField("Lumps", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_lump_left_other = StringField("Duration")
+    fld_nipple_discharge_left = SelectField("Nipple Discharge", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_nipple_discharge_left_other = StringField("Duration")
+    fld_nipple_retraction_left = SelectField("Nipple retraction",
+                                             choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_nipple_retraction_left_other = StringField("Duration")
+    fld_dimpling_left = SelectField("Dimpling", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_dimpling_left_other = StringField("Duration")
+    fld_discoloration_left = SelectField("Discoloration", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_discoloration_left_other = StringField("Duration")
+    fld_ulcer_left = SelectField("ulceration", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_ulcer_left_other = StringField("Duration")
+    fld_eczema_left = SelectField("Eczema", choices=PatientHistoryDict.symptom_absent_present_choice)
+    fld_eczema_left_other = StringField("Duration")
+
 
 class PatientHistoryForm(SectionForm):
     fld_med_rec_no = StringField('Medical Record Number', default=tbd)
@@ -73,9 +102,10 @@ class PatientHistoryForm(SectionForm):
     fld_email = StringField('e-mail id', default=tbd)
     fld_occupation = StringField('Occupation', default=tbd)
     fld_gender = SelectField("Gender", choices=CommonDict.gender_choice)
+    fld_gender_other = StringField('Other')
     fld_age = IntegerField('Current Age (yrs)', default =999)
     #todo format date.today() to dd/mm/yyyy
-    fld_date_of_birth = DateField('Date Of Birth (yyyy/mm/dd)',default=date.today())
+    fld_date_of_birth = DateField('Date Of Birth', default=date.today())
     fld_place_of_birth = StringField('Place Of Birth', default=tbd)
     fld_height_feet = StringField('Height (in feet eg., 5ft 2in) ', default='0ft 0in')
     fld_weight_kg = FloatField('Weight (in kg)', default=999)
@@ -119,8 +149,11 @@ class PatientHistoryForm(SectionForm):
     fld_age_first_child = IntegerField('Age of first child',default=999)
     fld_age_first_pregnancy = IntegerField('Age at first pregnancy', default=999)
     fld_age_last_pregnancy = IntegerField('Age at last pregnancy', default=999)
-    fld_twice_birth_in_year =  SelectField("Twice birth in a year(not including twins)", choices=CommonDict.yes_no_choice)
-    fld_breast_feed = SelectField("Breast feeding", choices=CommonDict.yes_no_choice)
+    fld_twice_birth_in_year =  SelectField("Twice birth in a year(not including twins)",
+                                           choices=CommonDict.yes_no_choice)
+    fld_twice_birth_in_year_other = StringField('Other')
+    fld_breast_feed_form_present = SelectField("Breast feeding", choices=CommonDict.form_yes_no_choice)
+    breast_feed_form = FormField(BreastFeedingForm)
     fld_fertility_treat = SelectField("Fertility Treatment", choices=CommonDict.yes_no_choice)
     fld_type_fertility_treat = StringField("Type of fertility treatment", default=tbd)
     fld_detail_fertility_treat = StringField("Details of fertility treatments", default=tbd)
@@ -140,12 +173,12 @@ class PatientHistoryForm(SectionForm):
     fld_left_breast_symptoms_form_present = SelectField("Are there symptoms in the left breast?",
                                                          choices=CommonDict.form_yes_no_choice)
     left_breast_symptoms_form = FormField(SymptomsLeftBreastDurationForm)
-    fld_complain_detected_by = SelectField("Current complains detected by", choices=PatientHistoryDict.current_complain_choice)
-    fld_complain_detected_by_other = StringField('Other')
-    fld_duration_current_complain = StringField("Duration of current complains", default=tbd)
-    fld_metastasis_symptoms = SelectMultipleField("Metastasis Symptoms", choices=PatientHistoryDict.metastasis_symptoms_choice)
+    fld_complaint_detected_by = SelectField("Current complains detected by",
+                                            choices=PatientHistoryDict.current_complain_choice)
+    fld_complaint_detected_by_other = StringField('Other')
+    fld_metastasis_symptoms = SelectMultipleField("Metastasis Symptoms",
+                                                  choices=PatientHistoryDict.metastasis_symptoms_choice)
     fld_metastasis_symptoms_other = StringField('Other')
     fld_annual_income = SelectField("Annual house income is", choices=PatientHistoryDict.annual_income_choice)
     fld_annual_income_other = StringField('Other')
     submit_button = SubmitField('Submit Form')
-    
