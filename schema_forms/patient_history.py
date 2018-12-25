@@ -148,4 +148,4 @@ class PatientHistoryForm(SectionForm):
     fld_annual_income = SelectField("Annual house income is", choices=PatientHistoryDict.annual_income_choice)
     fld_annual_income_other = StringField('Other')
     submit_button = SubmitField('Submit Form')
-
+    

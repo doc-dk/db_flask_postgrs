@@ -51,8 +51,9 @@ class MammographyForm(SectionForm):
                                                 choices=MammographyDict.mammo_lesion_right_breast_choice)
     fld_mammo_lesion_left_breast = SelectField("Location of skin lesion on left breast",
                                                choices=MammographyDict.mammo_lesion_left_breast_choice)
-    fld_mammography_tomosynthesis_form_present = SelectField("Has 3D Tomosynthesis been done for the patient?",
-                                                             choices=CommonDict.form_yes_no_choice)
+    fld_mammography_tomosynthesis = SelectField("Has 3D Tomosynthesis been done for the patient?",
+                                                             choices=CommonDict.yes_no_choice)
+    fld_mammography_tomosynthesis_other = StringField('Other')
     fld_mammo_birad = SelectField("BI-RAD classification (if available)", choices=MammographyDict.mammo_birad_choice)
     fld_mammo_impression = TextAreaField("Input Impression(if available): ")
     fld_mammography_abvs_form_present = SelectField("Has ABVS been done for the patient?",
