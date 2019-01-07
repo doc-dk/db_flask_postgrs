@@ -41,7 +41,7 @@ class SkinChangeForm(BaseForm):
 
 
 class PalpableAxillaryNodeForm(BaseForm):
-    fld_palpable_axillary_node_location = SelectField("Palpable axillary Node present in",
+    fld_palpable_axillary_node_location = SelectField("Palpable axillary Node present in?",
                                                       choices=CommonDict.breast_choice)
     fld_palpable_axillary_node_location_other = StringField("Other")
     fld_axillary_node_number = IntegerField("Number of node", default=0)
@@ -78,14 +78,14 @@ class ClinicalExamForm(SectionForm):
     fld_tender_other = StringField("Other")
     fld_retract = SelectField("Nipple retraction?", choices=CommonDict.breast_choice)
     fld_retract_other = StringField("Other")
-    fld_nipple_discharge_form_present = SelectField("Nipple discharge", choices=CommonDict.form_yes_no_choice)
+    fld_nipple_discharge_form_present = SelectField("Nipple discharge?", choices=CommonDict.form_yes_no_choice)
     nipple_discharge_form = FormField(NippleDischargeForm)
     fld_skin_change_form_present = SelectField("Any skin changes?", choices=CommonDict.form_yes_no_choice)
     skin_change_form = FormField(SkinChangeForm)
     fld_palpable_axillary_node_form_present = SelectField("Palpable Axillary Node?",
                                                           choices=CommonDict.form_yes_no_choice)
     palpable_axillary_node_form = FormField(PalpableAxillaryNodeForm)
-    fld_supraclavicular_node_form_present = SelectField("Palpable supraclavicular nodes",
+    fld_supraclavicular_node_form_present = SelectField("Palpable supraclavicular nodes?",
                                                         choices=CommonDict.form_yes_no_choice)
     supraclavicular_node_form = FormField(SupraClavicularNodeForm)
     fld_contralateral_breast = SelectField("Contralateral Breast", choices=ClinicalExamDict.contalateral_breast_choice)
