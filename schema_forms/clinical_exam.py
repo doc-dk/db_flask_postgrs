@@ -27,7 +27,7 @@ class MetastasisForm(BaseForm):
 
 
 class NippleDischargeForm(BaseForm):
-    fld_discharge = SelectField("Nipple discharge seen in?", choices=CommonDict.breast_choice)
+    fld_discharge = SelectField("Nipple discharge seen in", choices=CommonDict.breast_choice)
     fld_discharge_other = StringField("Other")
     fld_discharge_type = SelectField("Type of discharge", choices=ClinicalExamDict.discharge_type_choice)
     fld_discharge_type_other = StringField("Other")
@@ -41,7 +41,7 @@ class SkinChangeForm(BaseForm):
 
 
 class PalpableAxillaryNodeForm(BaseForm):
-    fld_palpable_axillary_node_location = SelectField("Palpable axillary Node present in?",
+    fld_palpable_axillary_node_location = SelectField("Palpable axillary Node present in",
                                                       choices=CommonDict.breast_choice)
     fld_palpable_axillary_node_location_other = StringField("Other")
     fld_axillary_node_number = IntegerField("Number of node", default=0)
@@ -56,36 +56,36 @@ class SupraClavicularNodeForm(BaseForm):
     fld_supraclavicular_node_location_other = StringField("Other")
     fld_supraclavicular_node_number = IntegerField("Number of supraclavicular node", default=0)
     fld_supraclavicular_node_size = FloatField("Size of supraclavicular node", default=0)
-    fld_supraclavicular_node_fixity = SelectField("Supraclavicular node fixity?", choices=CommonDict.yes_no_choice)
+    fld_supraclavicular_node_fixity = SelectField("Supraclavicular node fixity present", choices=CommonDict.yes_no_choice)
     fld_supraclavicular_node_fixity_other = StringField("Other")
 
 
 class ClinicalExamForm(SectionForm):
     fld_provisional_diagnosis = StringField("Provisional diagnosis", default=tbd)
-    fld_palpable_lump_form_present = SelectField("Palpable lump in the breast?", choices=CommonDict.form_yes_no_choice)
+    fld_palpable_lump_form_present = SelectField("Palpable lump in the breast", choices=CommonDict.form_yes_no_choice)
     palpable_lump_form = FormField(PalpableLumpForm)
-    fld_lump_size = SelectField("Lump Size", choices=ClinicalExamDict.lump_size_choice)
+    fld_lump_size = SelectField("Size of lump", choices=ClinicalExamDict.lump_size_choice)
     fld_lump_size_other = StringField("Other")
     fld_lump_number = SelectField("Number of lump", choices=ClinicalExamDict.lump_number_choice)
     fld_lump_number_other = StringField("Other")
-    fld_lump_consistency = SelectField("Consistency of lumps", choices=ClinicalExamDict.lump_consistency_choice)
+    fld_lump_consistency = SelectField("Consistency of lump", choices=ClinicalExamDict.lump_consistency_choice)
     fld_lump_consistency_other = StringField('Other')
     fld_fixity = SelectField("Lump fixity to", choices=ClinicalExamDict.lump_fixity_choice)
     fld_fixity_other = StringField("Other")
     fld_metastasis_form_present = SelectField("Metastasis", choices=CommonDict.form_yes_no_choice)
     metastasis_form = FormField(MetastasisForm)
-    fld_tender = SelectField("Tenderness in breast?", choices=CommonDict.breast_choice)
+    fld_tender = SelectField("Tenderness in breast", choices=CommonDict.breast_choice)
     fld_tender_other = StringField("Other")
-    fld_retract = SelectField("Nipple retraction?", choices=CommonDict.breast_choice)
+    fld_retract = SelectField("Nipple retraction", choices=CommonDict.breast_choice)
     fld_retract_other = StringField("Other")
-    fld_nipple_discharge_form_present = SelectField("Nipple discharge?", choices=CommonDict.form_yes_no_choice)
+    fld_nipple_discharge_form_present = SelectField("Nipple discharge", choices=CommonDict.form_yes_no_choice)
     nipple_discharge_form = FormField(NippleDischargeForm)
-    fld_skin_change_form_present = SelectField("Any skin changes?", choices=CommonDict.form_yes_no_choice)
+    fld_skin_change_form_present = SelectField("Any skin changes", choices=CommonDict.form_yes_no_choice)
     skin_change_form = FormField(SkinChangeForm)
-    fld_palpable_axillary_node_form_present = SelectField("Palpable Axillary Node?",
+    fld_palpable_axillary_node_form_present = SelectField("Palpable Axillary Node",
                                                           choices=CommonDict.form_yes_no_choice)
     palpable_axillary_node_form = FormField(PalpableAxillaryNodeForm)
-    fld_supraclavicular_node_form_present = SelectField("Palpable supraclavicular nodes?",
+    fld_supraclavicular_node_form_present = SelectField("Palpable supraclavicular nodes",
                                                         choices=CommonDict.form_yes_no_choice)
     supraclavicular_node_form = FormField(SupraClavicularNodeForm)
     fld_contralateral_breast = SelectField("Contralateral Breast", choices=ClinicalExamDict.contalateral_breast_choice)
