@@ -99,5 +99,12 @@ class ClinicalExamForm(SectionForm):
     fld_arm_vol_left = FloatField("Upper limb volume - left arm (cc): ", default=999)
     fld_arm_elbow_left = FloatField("Distance from the elbow - left arm (cml): ", default=999)
     fld_follow_up_advised = TextAreaField("Follow up tests advised for patient:")
-    fld_other_test = SelectMultipleField("Other test done", choices=ClinicalExamDict.other_test_choice)#other_test_other
+    fld_usg_abdomen = SelectField("USG Abdomen test", choices=ClinicalExamDict.usg_abdomen_choice)
+    fld_usg_abdomen_other = TextAreaField("Give details")
+    fld_cect_abdomen_thorax = SelectField("CECT Abdomen and Thorax", choices=ClinicalExamDict.cect_abdomen_thorax_choice)
+    fld_cect_abdomen_thorax_other = TextAreaField("Give details")
+    fld_pet_scan = SelectField("PET Scan", choices=ClinicalExamDict.pet_scan_choice)
+    fld_pet_scan_other = TextAreaField("Give details")
+    fld_bone_scan = SelectField("Bone Scan", choices=ClinicalExamDict.bone_scan_choice)
+    fld_bone_scan_other = TextAreaField("Give details")
     submit_button = SubmitField('Submit Form')
