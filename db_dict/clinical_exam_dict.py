@@ -23,6 +23,9 @@ class ClinicalExamDict():
                                  'Localised Mastitis':"Localised Mastitis", 'other':"Other"}
     arm_edema_dict = {'tbd':"To be filled",'right':"Right",'left':"Left",'not present':"Not present",'both':"Both",
                       'other':"Other"}
+    other_test_dict = {'tbd':"To be filled",'usg abdomen':"USG Abdomen",'cect abdomen and thorax':"CECT Abdomen and Thorax",
+                       'visceral matastasis':"Visceral Metastasis",'pet scan':"PET Scan",'skeletal metastasis':"Skeletal Metastasis",
+                       'bone scan':"Bone Scan",'other':"Other"}
 
     palpable_choice = CommonDict.generate_choice(palpable_dict)
     lump_size_choice = CommonDict.generate_choice(lump_size_dict)
@@ -34,3 +37,4 @@ class ClinicalExamDict():
     skin_change_type_choice = CommonDict.generate_choice(skin_change_type_dict)
     contalateral_breast_choice = CommonDict.generate_choice(contalateral_breast_dict)
     arm_edema_choice = CommonDict.generate_choice(arm_edema_dict)
+    other_test_choice = CommonDict.gender_choice(other_test_dict)

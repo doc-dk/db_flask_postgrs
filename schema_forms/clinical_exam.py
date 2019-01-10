@@ -99,4 +99,5 @@ class ClinicalExamForm(SectionForm):
     fld_arm_vol_left = FloatField("Upper limb volume - left arm (cc): ", default=999)
     fld_arm_elbow_left = FloatField("Distance from the elbow - left arm (cml): ", default=999)
     fld_follow_up_advised = TextAreaField("Follow up tests advised for patient:")
+    fld_other_test = SelectMultipleField("Other test done", choices=ClinicalExamDict.other_test_choice)#other_test_other
     submit_button = SubmitField('Submit Form')
