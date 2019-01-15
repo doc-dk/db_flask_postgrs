@@ -5,18 +5,22 @@ class BiopsyDict():
         self.key = key
         self.value = value
 
-    consent_stat_dict = {'tbd':"To be filled","N":"No Consent", "Y":"Consent Taken"}
-    consent_form_dict = {'tbd':"To be filled","Y":"Consent form with signature present in folder",
-                         "N":"Completed consent form not present in folder"}
-    biopsy_type_dict ={'tbd':"To be filled","direct":"Direct", "usg_guided":"USG Guided", "vab":"VAB",
-                       "trucut":"Tru-cut", "stereo":"Steriotactic", "other":"Other"}
+    biopsy_reason_dict = {'tbd':"To be filled",'diagnostic':"Diagnostic",'follow_up':"Follow-up",
+                          'nact_follow-up':"NACT follow up",'recurrence':"Recurrence",'other':"Other"}
+    biopsy_site_dict = {'tbd':"To be filled",'left_breast':"Left Breast",'right_breast':"Right Breast",
+                        'left_axillary':"Left Axillary",'right_axillary':"Right Axillary",'other':"Other"}
+    biopsy_block_id_dict ={'tbd':"To be filled",'physically_present_at_pccm':"If the blocks are physically present at PCCM enter the block id from the blocks",
+                           'not_physically_present_at_pccm':"If the blocks are not physically present at PCCM enetr the block ID from the biopsy report",
+                           'no_source_of_block':"If there is no source for the block ID mention as requires follow up",'other':"Other"}  #major doubt
+    biopsy_type_dict ={'tbd':"To be filled","direct":"Direct", "usg_guided":"USG Guided","vab":"VAB",
+                       "trucut":"Tru-cut", "stereo":"Steriotactic", 'other':"Other"}
     tumour_diagnosis_dict ={'tbd':"To be filled",'benign':'Benign',
                             'dcis_micro':"Ductal carcinoma in situ(DCIS) with microinvasion",
                             'dcis_no_micro':"Ductal carcinoma in situ(DCIS) without microinvasion","lcs":
                             "Lobular Carcinoma in Situ (LCS)","idc":"Invasive Ductal Carcinoma (IDC)",'ilc':
                             "Invasive Lobular Carcinoma (ILC)",'gm':"Granulamatous Mastitis",'papc':"Papillary Carcinoma",
                             'phyc':"Phylloid Carcinoma",'imc':"Invasive Mammary Carcinoma",'ibc':
-                            "Invasive Breast Carcinoma", 'other':'Other'}
+                            "Invasive Breast Carcinoma", 'other':"Other"}
     biopsy_custody_pccm_dict = {'tbd':"To be filled","Y":"In PCCM Custody", "N":"Not in PCCM custody"}
     tumour_grade_dict = {'tbd':"To be filled","1":'Grade 1', "2": "Grade 2","3": "Grade 3"}
     lymphovascular_emboli_dict = {'tbd':"To be filled","Y": "Lymphovascular Emboli Seen",
@@ -37,8 +41,9 @@ class BiopsyDict():
     fnac_diagnosis_dict = {'tbd':"To be filled", "normal":"Normal", "benign":"Benign", "malignant":"Malignant",
                            'report': 'Not mentioned in Report', 'other': 'Other'}
 
-    consent_stat_choice = CommonDict.generate_choice(consent_stat_dict)
-    consent_form_choice = CommonDict.generate_choice(consent_form_dict)
+    biopsy_reason_choice = CommonDict.gender_choice(biopsy_reason_dict)
+    biopsy_site_choice = CommonDict.gender_choice(biopsy_site_dict)
+    biopsy_block_id_choice = CommonDict.generate_choice(biopsy_block_id_dict)
     biopsy_type_choice = CommonDict.generate_choice(biopsy_type_dict)
     tumour_diagnosis_choice = CommonDict.generate_choice(tumour_diagnosis_dict)
     biopsy_custody_pccm_choice = CommonDict.generate_choice(biopsy_custody_pccm_dict)
