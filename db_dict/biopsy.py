@@ -12,8 +12,14 @@ class BiopsyDict():
     biopsy_block_id_dict ={'tbd':"To be filled",'physically_present_at_pccm':"If the blocks are physically present at PCCM enter the block id from the blocks",
                            'not_physically_present_at_pccm':"If the blocks are not physically present at PCCM enetr the block ID from the biopsy report",
                            'no_source_of_block':"If there is no source for the block ID mention as requires follow up",'other':"Other"}  #major doubt
+    biopsy_block_source_dict = {'tbd':"To be filled",'ag_diagnostics':"A.G. Diagnostics",'ruby_hall_clinic':"Ruby Hall Clinic",
+                           'srl_pathlab':"SRL Pathlab",'golwilkar_lab':"Golwilkar Lab",'other':"Other"}
     biopsy_type_dict ={'tbd':"To be filled","direct":"Direct", "usg_guided":"USG Guided","vab":"VAB",
                        "trucut":"Tru-cut", "stereo":"Steriotactic", 'other':"Other"}
+    biopsy_diagnosis_dict = {'tbd':"To be filled",'infiltrating_duct_carcinoma':"Infiltrating Duct Carcinoma",
+                             'invasive_mammary_carcinoma':"Invasive Mammary Carcinoma",'dcis':"DSIC",
+                             'fibroadenoma':"Fibroadenoma",'infiltrating_duct_carcinoma_dsic':"Infiltrating Duct carcinoma +DSIC",
+                             'other':"Other"}
     tumour_diagnosis_dict ={'tbd':"To be filled",'benign':'Benign',
                             'dcis_micro':"Ductal carcinoma in situ(DCIS) with microinvasion",
                             'dcis_no_micro':"Ductal carcinoma in situ(DCIS) without microinvasion","lcs":
@@ -44,7 +50,9 @@ class BiopsyDict():
     biopsy_reason_choice = CommonDict.gender_choice(biopsy_reason_dict)
     biopsy_site_choice = CommonDict.gender_choice(biopsy_site_dict)
     biopsy_block_id_choice = CommonDict.generate_choice(biopsy_block_id_dict)
+    biopsy_block_source_choice = CommonDict.generate_choice(biopsy_block_source_dict)
     biopsy_type_choice = CommonDict.generate_choice(biopsy_type_dict)
+    biopsy_diagnosis_choice = CommonDict.generate_choice(biopsy_diagnosis_dict)
     tumour_diagnosis_choice = CommonDict.generate_choice(tumour_diagnosis_dict)
     biopsy_custody_pccm_choice = CommonDict.generate_choice(biopsy_custody_pccm_dict)
     tumour_grade_choice = CommonDict.generate_choice(tumour_grade_dict)
