@@ -1,4 +1,4 @@
-from wtforms import StringField, validators, IntegerField, SelectField, SubmitField
+from wtforms import StringField, validators, IntegerField, SelectField, SubmitField, TextAreaField
 from wtforms.fields.html5 import DateField
 from db_dict.biopsy import BiopsyDict
 from schema_forms.form_utilities import SectionForm
@@ -34,13 +34,12 @@ class BiopsyForm (SectionForm):
     fld_biopsy_lab_id_sid = StringField("Biopsy Lab ID")
     fld_biopsy_type = SelectField("Biopsy Type", choices=BiopsyDict.biopsy_type_choice)
     fld_biopsy_type_other = StringField("Other")
-    fld_biopsy_diagnosis = SelectField("Mention the diagnosis", choices=BiopsyDict.biopsy_diagnosis_choice)
-    fld_biopsy_diagnosis_other = StringField("Give details")
-    fld_biopsy_diagnosis_comment = StringField("Descriptive or indicative ntes while diagnosis")
-    fld_biopsy_tumour_diagnosis = SelectField("Tumour Diagnosis", choices=BiopsyDict.tumour_diagnosis_choice)
-    fld_biopsy_tumour_diagnosis_other = StringField("Other")
+    fld_biopsy_diagnosis = TextAreaField('Mention the diagnosis in its fullform.'
+                                         ' Eg: Infiltrating Duct Carcinoma/Invasive Mammary Carcinoma/ DCIS/Fibroadenoma; '
+                                         'Infiltrating Duct Carcinoma + DCIS')
+    fld_biopsy_diagnosis_comment = StringField("Descriptive or indicative notes while diagnosis")
     fld_biopsy_tumour_grade = SelectField("Tumour Grade", choices=BiopsyDict.tumour_grade_choice)
-    fld_biopsy_tumour_grade_other = StringField("Other")
+    fld_biopsy_tumour_grade_other = StringField("Give details")
     fld_biopsy_lymphovascular_emboli = SelectField('Are Lymphovascular emboli seen?',
                                                    choices=BiopsyDict.lymphovascular_emboli_choice)
     fld_biopsy_lymphovascular_emboli_other = StringField("Other")
@@ -55,6 +54,8 @@ class BiopsyForm (SectionForm):
     fld_tumour_her2_biopsy = SelectField("HER2 Status", choices=BiopsyDict.tumour_her2_choice)
     fld_tumour_her2_biopsy_other = StringField("Other")
     fld_tumour_her2_grade_biopsy = StringField("HER2 Grade", default="0")
+    fld_tumor_biopsy_fish = SelectField("Tumor biopsy FISH", choices=BiopsyDict.tumor_biopsy_fish_choice)
+    fld_tumor_biopsy_fish_other = StringField("Other")
     fld_tumour_ki67_biopsy = StringField("Ki67 Percent", default="0")
     fld_fnac = SelectField("Lymph Node biopsy FNAC", choices=BiopsyDict.fnac_choice)
     fld_fnac_other = StringField("Other")
