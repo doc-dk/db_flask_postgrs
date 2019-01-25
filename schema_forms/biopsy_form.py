@@ -1,9 +1,62 @@
-from wtforms import StringField, validators, IntegerField, SelectField, SubmitField, TextAreaField
+from wtforms import StringField, validators, IntegerField, SelectField, SubmitField, TextAreaField, FormField
 from wtforms.fields.html5 import DateField
 from db_dict.biopsy import BiopsyDict
-from schema_forms.form_utilities import SectionForm
+from schema_forms.form_utilities import SectionForm, BaseForm
 from db_dict.common_dict import CommonDict
 from datetime import date
+
+tbd = "To be done"
+
+
+class SurgeryForm(BaseForm):
+    fld_surgery_block_id = StringField("Surgical Block ID", default=tbd)
+    fld_surgery_no_of_blocks = IntegerField("Number of blocks", default=tbd)
+    fld_surgery_block_source = SelectField("Mention the laboratory from where the reports have been generated",
+                                           choices=BiopsyDict.biopsy_block_source_choice)  # use same dict as biopsy
+    fld_surgery_block_source_other = StringField("other")
+    fld_nact_or_naht = SelectField("is NACT or NAHT done", choices=CommonDict.yes_no_choice)
+    fld_nact_or_naht_other = StringField("Give details")
+    fld_surgery_tumour_block_reference = TextAreaField("Tumour block reference", default=tbd)
+    fld_surgery_nodes_block_reference = TextAreaField("Nodes block reference", default=tbd)
+    fld_surgery_adjacent_normal_block_reference = TextAreaField("Adjacent Normal block reference", default=tbd)
+    fld_surgery_reduction_tissue_block_reference = TextAreaField("Reduction Tissue block reference", default=tbd)
+    fld_surgery_date = DateField("Date of Surgery")
+    fld_surgery_name_surgeon_id = StringField("Name of Surgeon", default='Dr. Koppiker')
+    fld_surgery_hospital_id = StringField("Hospital ID", default=tbd)
+    fld_reason_for_biopsy = StringField("Reason for biopsy", default=tbd)
+    fld_surger_lesion_side = SelectField("Lesion Side", choices=CommonDict.breast_choice)
+    fld_surger_lesion_side_other = StringField("Other")
+    fld_surgery_right_breast_type = SelectField("Type of Surgery for Right Breast",
+                                                choices=BiopsyDict.surgery_type_choice)
+    fld_surgery_right_breast_type_other = StringField("Other")
+    fld_surgery_left_breast_type = SelectField("Type of Surgery for Left Breast",
+                                               choices=BiopsyDict.surgery_type_choice)
+    fld_surgery_left_breast_type_other = StringField("Other")
+    fld_surgery_tumour_size = StringField("Tumour size", default=tbd)
+    fld_surgery_tumour_size_unit = StringField('Unit for tumour size', default='cm')
+    fld_surgery_tumour_grade = SelectField("Tumour Grade", choices=BiopsyDict.tumour_grade_choice)
+    fld_surgery_tumour_grade_other = StringField("Other")
+    fld_surgery_surgery_diagnosis = SelectField("Surgery Diagnosis", choices=BiopsyDict.surgery_diagnosis_choice)
+    fld_surgery_surgery_diagnosis_other = StringField("Other")
+    fld_diagnosis_comment = StringField("Include descriptive or indicative notes here and not in Diagnosis")
+    fld_surgery_block_DCIS_percent = StringField("mention the DSIC percent")
+    fld_surgery_perineural_invasion = SelectField("Perineural Invasion", choices=CommonDict.absent_present_choice)
+    fld_surgery_perineural_invasion_other = StringField("Other")
+    fld_surgery_necrosis = SelectField("Necrosis", choices=CommonDict.absent_present_choice)
+    fld_surgery_necrosis_other = StringField("Other")
+    fld_surgery_block_report_lymphovascular_invasion = SelectField("lymphovascular invasion is seen or not",
+                                                                   choices=BiopsyDict.lymphovascular_invasion_choice)
+    fld_surgery_er = SelectField("ER Status", choices=CommonDict.postive_negative_choice)
+    fld_surgery_er_other = StringField("Other")
+    fld_surgery_er_percent = StringField("ER Percent", default="0")
+    fld_surgery_pr = SelectField("PR Status", choices=CommonDict.postive_negative_choice)
+    fld_surgery_pr_other = StringField("Other")
+    fld_surgery_pr_percent = StringField("PR Percent", default="0")
+    fld_surgery_her2 = SelectField("HER2 Status", choices=BiopsyDict.tumour_her2_choice)
+    fld_surgery_her2_other = StringField("Other")
+    fld_surgery_her2_grade = StringField("HER2 Grade", default="0")
+    fld_surgery_fish = SelectField("Tumour block FISH", choices=CommonDict.postive_negative_choice)
+    fld_surgery_ki67 = StringField("Ki67 Percent", default="0")
 
 
 class BiopsyForm (SectionForm):
@@ -37,7 +90,7 @@ class BiopsyForm (SectionForm):
     fld_biopsy_diagnosis = TextAreaField('Mention the diagnosis in its fullform.'
                                          ' Eg: Infiltrating Duct Carcinoma/Invasive Mammary Carcinoma/ DCIS/Fibroadenoma; '
                                          'Infiltrating Duct Carcinoma + DCIS')
-    fld_biopsy_diagnosis_comment = StringField("Descriptive or indicative notes while diagnosis")
+    fld_biopsy_diagnosis_comment = StringField("Include descriptive or indicative notes here and not in Diagnosis")
     fld_biopsy_tumour_grade = SelectField("Tumour Grade", choices=BiopsyDict.tumour_grade_choice)
     fld_biopsy_tumour_grade_other = StringField("Give details")
     fld_biopsy_lymphovascular_emboli = SelectField('Are Lymphovascular emboli seen?',
@@ -63,4 +116,27 @@ class BiopsyForm (SectionForm):
     fld_fnac_location_other = StringField("Other")
     fld_fnac_diagnosis = SelectField("FNAC Diagnosis", choices=BiopsyDict.fnac_diagnosis_choice)
     fld_fnac_diagnosis_other = StringField("Other")
+    fld_surgery_done = SelectField("is surgery done",choices=CommonDict.yes_no_choice)
+    fld_surgery_done_other = StringField("other")
+    fld_surgery_form_present = SelectField("is surgery performed",
+                                                        choices=CommonDict.form_yes_no_choice)
+    surgery_form = FormField(SurgeryForm)
     submit_button = SubmitField('Submit Form')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

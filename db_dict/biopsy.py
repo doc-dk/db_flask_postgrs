@@ -38,6 +38,18 @@ class BiopsyDict():
                           'report': 'Not mentioned in Report', 'other': 'Other'}
     fnac_diagnosis_dict = {'tbd':"To be filled", "normal":"Normal", "benign":"Benign", "malignant":"Malignant",
                            'report': 'Not mentioned in Report', 'other': 'Other'}
+    surgery_type_dict = {'bcs': "Breast Conservation Surgery (BCS)", 'tm': "Therapeutic Mammoplasty",
+                         'rm': "Reduction Mammoplasty", 'reconstruction': "Reconstruction",
+                         'reco-mastectomy': "Reconstruction: Mastectomy",
+                         'reco:mrm': "Reconstruction: Modified Radical Mastectomy",
+                         'reco:implant': "Reconstruction: Implant", 'wle': "Wide Local Excision", 'other': "Other", }
+    surgery_diagnosis_dict = {'tbd': "To be filled", 'dcis': "Ductal carcinoma in situ",
+                              "lcs": "Lobular Carcinoma in Situ (LCS)", "idc": "Invasive Ductal Carcinoma (IDC)",
+                              'ilc': "Invasive Lobular Carcinoma (ILC)", 'gm': "Granulamatous Mastitis",
+                              'papc': "Papillary Carcinoma", 'phyc': "Phylloid Carcinoma",
+                              'imc': "Invasive Mammary Carcinoma", 'ibc': "Invasive Breast Carcinoma", 'other': 'Other'}
+    lymphovascular_invasion_dict = {'tbd': "To be filled",'seen':"Seen",'not_seen':"Not seen",
+                                    'data_not_entered':"Data not entered",'other':"Other"}
 
     biopsy_reason_choice = CommonDict.gender_choice(biopsy_reason_dict)
     biopsy_site_choice = CommonDict.gender_choice(biopsy_site_dict)
@@ -55,3 +67,8 @@ class BiopsyDict():
     fnac_choice = CommonDict.generate_choice(fnac_dict)
     fnac_location_choice = CommonDict.generate_choice(fnac_location_dict)
     fnac_diagnosis_choice = CommonDict.generate_choice(fnac_diagnosis_dict)
+    surgery_type_choice = CommonDict.generate_choice(surgery_type_dict)
+    surgery_diagnosis_choice = CommonDict.generate_choice(surgery_diagnosis_dict)
+    lymphovascular_invasion_choice = CommonDict.generate_choice(lymphovascular_invasion_dict)
+
+
