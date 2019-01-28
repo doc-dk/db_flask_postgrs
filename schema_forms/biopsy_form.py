@@ -57,7 +57,13 @@ class SurgeryForm(BaseForm):
     fld_surgery_her2_grade = StringField("HER2 Grade", default="0")
     fld_surgery_fish = SelectField("Tumour block FISH", choices=CommonDict.postive_negative_choice)
     fld_surgery_ki67 = StringField("Ki67 Percent", default="0")
-
+    fld_surgery_block_report_sentinel_node_number_removed = IntegerField("if nodes are removed,"
+                                                                         "enter the number of nodes removed", default=tbd)
+    fld_surgery_block_report_sentinel_node_number_removed_other = StringField("NA")
+    fld_surgery_block_report_sentinel_node_number_positive = IntegerField("if nodes are removed,"
+                                                                         "enter the number of nodes positive", default=tbd)
+    fld_surgery_block_report_sentinel_node_number_positive_other = StringField("NA")
+    
 
 class BiopsyForm (SectionForm):
     def get_summary(self):
