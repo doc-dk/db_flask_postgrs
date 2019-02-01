@@ -50,6 +50,9 @@ class BiopsyDict():
                               'imc': "Invasive Mammary Carcinoma", 'ibc': "Invasive Breast Carcinoma", 'other': 'Other'}
     lymphovascular_invasion_dict = {'tbd': "To be filled",'seen':"Seen",'not_seen':"Not seen",
                                     'data_not_entered':"Data not entered",'other':"Other"}
+    pathological_staging_pt_dict = {'tbd': "To be filled",'1':"1",'2':"2",'3':"3",'4':"4",'other':"Other"}
+    pathological_staging_m_dict = {'tbd': "To be filled",'0':"0",'1':"1",'other':"Other"}
+    pathological_staging_p_stage_dict = {'tbd': "To be filled",'1':"1",'2':"2",'3':"3",'other':"Other"}
 
     biopsy_reason_choice = CommonDict.gender_choice(biopsy_reason_dict)
     biopsy_site_choice = CommonDict.gender_choice(biopsy_site_dict)
@@ -70,5 +73,8 @@ class BiopsyDict():
     surgery_type_choice = CommonDict.generate_choice(surgery_type_dict)
     surgery_diagnosis_choice = CommonDict.generate_choice(surgery_diagnosis_dict)
     lymphovascular_invasion_choice = CommonDict.generate_choice(lymphovascular_invasion_dict)
-
+    pathological_staging_pt_choice = CommonDict.generate_choice(pathological_staging_pt_dict)
+    pathological_staging_m_choice = CommonDict.generate_choice(pathological_staging_m_dict)
+    pathological_staging_p_stage_choice = CommonDict.generate_choice(pathological_staging_p_stage_dict)
+1
 

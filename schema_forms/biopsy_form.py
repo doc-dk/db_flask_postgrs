@@ -63,7 +63,24 @@ class SurgeryForm(BaseForm):
     fld_surgery_block_report_sentinel_node_number_positive = IntegerField("if nodes are removed,"
                                                                          "enter the number of nodes positive", default=tbd)
     fld_surgery_block_report_sentinel_node_number_positive_other = StringField("NA")
-    
+    fld_surgery_block_report_axillary_node_number_positive = IntegerField("if nodes are removed,"
+                                                                         "enter the number of nodes positive", default=tbd)
+    fld_surgery_block_report_axillary_node_number_positive_other = StringField("NA")
+    fld_surgery_block_report_apical_node_number_positive = IntegerField("if nodes are removed,"
+                                                                          "enter the number of nodes positive",
+                                                                          default=tbd)
+    fld_surgery_block_report_apical_node_number_positive_other = StringField("NA")
+    fld_node_block_report_perinodal_spread = SelectField("Block Report Perinodal spread", choices=BiopsyDict.lymphovascular_invasion_choice)
+    fld_node_block_report_perinodal_spread_other = StringField("Requires follow-up")
+    fld_pathological_staging_pt = SelectField(choices=BiopsyDict.pathological_staging_pt_choice)
+    fld_pathological_staging_pt_other = StringField("other")
+    fld_pathological_staging_pn = SelectField(choices=BiopsyDict.pathological_staging_pt_choice)
+    fld_pathological_staging_pn_other = StringField("other")
+    fld_pathological_staging_m = SelectField(choices=BiopsyDict.pathological_staging_m_choice)
+    fld_pathological_staging_m_other = StringField("other")
+    fld_pathological_staging_p_stage = SelectField(choices=BiopsyDict.pathological_staging_p_stage_choice)
+
+
 
 class BiopsyForm (SectionForm):
     def get_summary(self):
