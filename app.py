@@ -254,9 +254,6 @@ def view_folder(folder_pk):
     elif active_tab_id == "Biopsy":
         folder_sections = [
             create_folder_section(folder_pk, "biopsy", "biopsy", biopsy_db.get_folder_items),
-        ]
-    elif active_tab_id == "Surgery":
-        folder_sections = [
             create_folder_section(folder_pk, "surgery", "surgery", surgery_db.get_folder_items),
         ]
     elif active_tab_id == "PatientHistory":
