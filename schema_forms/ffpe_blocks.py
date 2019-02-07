@@ -7,7 +7,7 @@ from datetime import date
 
 tbd = "To be done"
 
-class SurgeryForm(BaseForm):
+class SurgeryBlockForm(BaseForm):
     fld_surgery_block_id = StringField("Surgical Block ID", default=tbd)
     fld_surgery_no_of_blocks = IntegerField("Number of blocks", default=tbd)
     fld_surgery_block_source = SelectField("Mention the laboratory from where the reports have been generated",
@@ -142,7 +142,7 @@ class BiopsyForm (SectionForm):
     fld_surgery_done_other = StringField("other")
     fld_surgery_form_present = SelectField("is surgery performed",
                                                         choices=CommonDict.form_yes_no_choice)
-    surgery_form = FormField(SurgeryForm)
+    surgery_form = FormField(SurgeryBlockForm)
     submit_button = SubmitField('Submit Form')
 
 

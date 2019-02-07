@@ -7,8 +7,7 @@ from dbs.userdb import UserDb
 from schema_forms.patient_history import PatientHistoryForm
 from schema_forms.medical_history_form import MedicalHistoryForm, PatientCancerHistoryForm, FamilyHistoryForm
 from schema_forms.clinical_exam import ClinicalExamForm
-from schema_forms.biopsy_form import BiopsyForm
-from schema_forms.surgery_block_form import SurgeryForm
+from schema_forms.ffpe_blocks import BiopsyForm
 from schema_forms.mammo_form import MammographyForm, MammoMassForm, MammoCalcificationForm
 from schema_forms.nact import NeoAdjuvantChemoDrugForm, NeoAdjuvantChemoToxicityForm, NeoAdjuvantChemoTherapyForm
 from schema_forms.usg import SonoMammographyForm, SonoMammoMassForm
@@ -97,11 +96,6 @@ biopsy_db = SectionDb(log, BiopsyForm, 'biopsy')
 biopsy_db.connect(url)
 biopsy_crudprint = construct_crudprint('biopsy', biopsy_db, folder_db)
 app.register_blueprint(biopsy_crudprint, url_prefix="/biopsy")
-
-surgery_db = SectionDb(log, SurgeryForm, 'surgery')
-surgery_db.connect(url)
-surgery_crudprint = construct_crudprint('surgery', surgery_db, folder_db)
-app.register_blueprint(surgery_crudprint, url_prefix="/surgery")
 
 patient_history_db = SectionDb(log, PatientHistoryForm, 'patient_history')
 patient_history_db.connect(url)
@@ -252,10 +246,7 @@ def view_folder(folder_pk):
             create_folder_section(folder_pk,  "usg", "usg", usg_db.get_folder_items),
             create_folder_section(folder_pk,  "usg_mass","usg_mass", usg_mass_db.get_folder_items, is_list=True), ]
     elif active_tab_id == "Biopsy":
-        folder_sections = [
-            create_folder_section(folder_pk, "biopsy", "biopsy", biopsy_db.get_folder_items),
-            create_folder_section(folder_pk, "surgery", "surgery", surgery_db.get_folder_items),
-        ]
+        folder_sections = [create_folder_section(folder_pk, "biopsy", "biopsy", biopsy_db.get_folder_items),]
     elif active_tab_id == "PatientHistory":
         folder_sections = [
             create_folder_section(folder_pk, "patient_history","patient_history",patient_history_db.get_folder_items),

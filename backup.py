@@ -6,7 +6,7 @@ from dbs.foldersdb import FoldersDb
 from dbs.userdb import UserDb
 from schema_forms.patient_history import PatientHistoryForm, PhysicalActivityForm, NutritionalSupplementsForm
 from schema_forms.medical_history_form import MedicalHistoryForm, PatientCancerHistoryForm, FamilyHistoryForm
-from schema_forms.biopsy_form import BiopsyForm
+from schema_forms.ffpe_blocks import BiopsyForm
 from schema_forms.surgery_block_form import SurgeryForm
 from schema_forms.mammo_form import MammographyForm, MammoMassForm, MammoCalcificationForm
 from schema_forms.nact import NeoAdjuvantChemoDrugForm, NeoAdjuvantChemoToxicityForm, NeoAdjuvantChemoTherapyForm
