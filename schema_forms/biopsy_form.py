@@ -7,7 +7,6 @@ from datetime import date
 
 tbd = "To be done"
 
-
 class SurgeryForm(BaseForm):
     fld_surgery_block_id = StringField("Surgical Block ID", default=tbd)
     fld_surgery_no_of_blocks = IntegerField("Number of blocks", default=tbd)

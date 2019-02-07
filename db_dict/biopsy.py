@@ -54,8 +54,8 @@ class BiopsyDict():
     pathological_staging_m_dict = {'tbd': "To be filled",'0':"0",'1':"1",'other':"Other"}
     pathological_staging_p_stage_dict = {'tbd': "To be filled",'1':"1",'2':"2",'3':"3",'other':"Other"}
 
-    biopsy_reason_choice = CommonDict.gender_choice(biopsy_reason_dict)
-    biopsy_site_choice = CommonDict.gender_choice(biopsy_site_dict)
+    biopsy_reason_choice = CommonDict.generate_choice(biopsy_reason_dict)
+    biopsy_site_choice = CommonDict.generate_choice(biopsy_site_dict)
     biopsy_block_id_choice = CommonDict.generate_choice(biopsy_block_id_dict)
     biopsy_block_source_choice = CommonDict.generate_choice(biopsy_block_source_dict)
     biopsy_type_choice = CommonDict.generate_choice(biopsy_type_dict)
