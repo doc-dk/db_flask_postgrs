@@ -29,7 +29,7 @@ class BiopsyDict():
     tumour_pr_dict = {'tbd':"To be filled","pos":"Positive", "neg": "Negative", 'report': 'Not mentioned in Report',
                                   'other': 'Other'}
     tumour_her2_dict = {'tbd':"To be filled","pos": "Positive", "eqv": "Equivocal", "neg": "Negative",
-                        'report': 'Not mentioned in Report', 'other': 'Other'}
+                        'report': 'Not done', 'other': 'Other'}
     tumor_biopsy_fish_dict = {'tbd':"To be filled",'positive':"Positive",'negetive':"Negetive",'not_done':"Not Done",
                               'other': 'Other'}
     fnac_dict = {'tbd':"To be filled","Y":"Done", "N":"Not Done", 'report': 'Not mentioned in Report',
@@ -53,6 +53,8 @@ class BiopsyDict():
     pathological_staging_pt_dict = {'tbd': "To be filled",'1':"1",'2':"2",'3':"3",'4':"4",'other':"Other"}
     pathological_staging_m_dict = {'tbd': "To be filled",'0':"0",'1':"1",'other':"Other"}
     pathological_staging_p_stage_dict = {'tbd': "To be filled",'1':"1",'2':"2",'3':"3",'other':"Other"}
+    nact_naht_dict = {'tbd': "To be filled",'nact':"NACT",'naht':"NAHT",'both':"Both",'none':"None",'other':"Other"}
+    surgery_dict = {'tbd': "To be filled",'yes':"Yes",'no':"No",'not_done':"Not done",'other':"Other"}
 
     biopsy_reason_choice = CommonDict.generate_choice(biopsy_reason_dict)
     biopsy_site_choice = CommonDict.generate_choice(biopsy_site_dict)
@@ -76,5 +78,7 @@ class BiopsyDict():
     pathological_staging_pt_choice = CommonDict.generate_choice(pathological_staging_pt_dict)
     pathological_staging_m_choice = CommonDict.generate_choice(pathological_staging_m_dict)
     pathological_staging_p_stage_choice = CommonDict.generate_choice(pathological_staging_p_stage_dict)
+    nact_naht_choice = CommonDict.generate_choice(nact_naht_dict)
+    surgery_choice = CommonDict.generate_choice(surgery_dict)
 1
 

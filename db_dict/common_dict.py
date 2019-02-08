@@ -25,7 +25,7 @@ class CommonDict():
                   'ivc': "IVC: High suspicion for malignancy",'v':"V:  Highly Suggestive of Malignancy", 'other': "Other"}
     distance_from_nipple_dict = {'tbd':"To be filled",'NA':"Not Present", '<.5': "<0.5 cm", '>0.5': ">0.5 cm", 'other': "Other"}
     yes_no_dict = {'tbd':"To be filled","N": "No", "Y": "Yes", 'other': "Other"}
-    yes_no_other_dict = {'tbd': "To be filled", "other": "Yes", "N": "No", 'na':'Data not available'}
+    yes_no_other_dict = {'tbd': "To be filled", "other": "Yes", "N": "No", 'na':'Not done'}
     form_yes_no_dict ={'tbd':"To be filled",'na':'Not available in report',"N": "No", "Y": "Yes"}
 
     absent_present_dict = {'tbd':"To be filled",'absent':'Absent', 'present':'Present', 'na': "Not mentioned in report",
