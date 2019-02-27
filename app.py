@@ -7,6 +7,9 @@ from dbs.userdb import UserDb
 from schema_forms.patient_history import PatientHistoryForm
 from schema_forms.medical_history_form import MedicalHistoryForm, PatientCancerHistoryForm, FamilyCancerHistoryForm
 from schema_forms.clinical_exam import ClinicalExamForm
+from schema_forms.type_of_surgery import SurgeryReportForm
+from schema_forms.nodes_surgery import NodesFrozenSectionForm
+from schema_forms.post_surgery_complication_surgery import PostSurgeryComplicationForm
 from schema_forms.pathological_reports import BiopsyForm
 from schema_forms.mammo_form import MammographyForm, MammoMassForm, MammoCalcificationForm
 from schema_forms.nact import NeoAdjuvantChemoDrugForm, NeoAdjuvantChemoToxicityForm, NeoAdjuvantChemoTherapyForm
@@ -121,6 +124,21 @@ clinical_exam_db = SectionDb(log, ClinicalExamForm, 'clinical_exam')
 clinical_exam_db.connect(url)
 clinical_exam_crudprint = construct_crudprint('clinical_exam', clinical_exam_db, folder_db)
 app.register_blueprint(clinical_exam_crudprint, url_prefix="/clinical_exam")
+
+type_of_surgery_db = SectionDb(log, SurgeryReportForm, 'type_of_surgery')
+type_of_surgery_db.connect(url)
+type_of_surgery_crudprint = construct_crudprint('type_of_surgery', type_of_surgery_db, folder_db)
+app.register_blueprint(type_of_surgery_crudprint, url_prefix="/type_of_surgery")
+
+nodes_surgery_db = SectionDb(log, NodesFrozenSectionForm, 'nodes_surgery')
+nodes_surgery_db.connect(url)
+nodes_surgery_crudprint = construct_crudprint('nodes_surgery', nodes_surgery_db, folder_db)
+app.register_blueprint(nodes_surgery_crudprint, url_prefix="/nodes_surgery")
+
+post_surgery_complication_surgery_db = SectionDb(log, PostSurgeryComplicationForm, 'post_surgery_complication_surgery')
+post_surgery_complication_surgery_db.connect(url)
+post_surgery_complication_surgery_crudprint = construct_crudprint('post_surgery_complication_surgery', post_surgery_complication_surgery_db, folder_db)
+app.register_blueprint(post_surgery_complication_surgery_crudprint, url_prefix="/post_surgery_complication_surgery")
 #
 #########################################################
 # Login, registration and index
@@ -269,6 +287,13 @@ def view_folder(folder_pk):
             create_folder_section(folder_pk, "nact_drug", "nact_drug", nact_drug_db.get_folder_items, is_list=True),
             create_folder_section(folder_pk, "nact_toxicity", "nact_toxicity", nact_toxicity_db.get_folder_items,
                                   is_list=True), ]
+    elif active_tab_id =="Surgery":
+        folder_sections = [
+            create_folder_section(folder_pk, "type_of_surgery","type_of_surgery", type_of_surgery_db.get_folder_items, is_list=True),
+            create_folder_section(folder_pk, "nodes_surgery","nodes_surgery", nodes_surgery_db.get_folder_items, is_list=True),
+            create_folder_section(folder_pk, "post_surgery_complication_surgery","post_surgery_complication_surgery",
+                                  post_surgery_complication_surgery_db.get_folder_items, is_list=True)
+            ]
 
     folder_tabs = [        
         ("PatientHistory", "Patient History"),
@@ -285,7 +310,6 @@ def view_folder(folder_pk):
 
     return render_template('folder_tabs.html', folder_number = folder_number, key = folder_pk,
                             folder_sections=folder_sections, folder_tabs=folder_tabs, active_tab_id=active_tab_id)
-
 
 def create_folder_section(folder_pk, id, section_name, db_get, is_list=False):
     forms = db_get(folder_pk)
