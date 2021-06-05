@@ -1,6 +1,6 @@
 import datetime
 from flask import Flask, render_template, flash, redirect, url_for, session, request
-from passlib.hash import sha256_crypt
+from passlib.handlers.sha2_crypt import sha256_crypt
 from log import Log
 from dbs.foldersdb import FoldersDb
 from dbs.userdb import UserDb
@@ -27,10 +27,10 @@ import os
 # Initialize logging
 log = Log()
 # Initialize DB
-url = os.getenv('BCDB_URL')
+# url = os.getenv('BCDB_URL')
 url = None
 if url is None:
-    url = 'mongodb://localhost:27017'
+    url = 'mongodb+srv://admin:zT2SfgLN6Efr6NmG@pccm.rddjc.mongodb.net/pccm_db?retryWrites=true&w=majority'
 url = url.replace('"', '')
 print('Using db at: '+url)
 
@@ -46,9 +46,9 @@ db.connect(url)
 users_db = UserDb(log)
 users_db.connect(url)
 
-#Initialize section DBs
+# Initialize section DBs
 app = Flask(__name__)
-Bootstrap(app)
+bootstrap = Bootstrap(app)
 
 folder_db = FoldersDb(log, FoldersForm)
 folder_db.connect(url)
@@ -67,23 +67,28 @@ app.register_blueprint(nact_drug_crudprint, url_prefix="/nact_drug")
 
 nact_toxicity_db = SectionDb(log, NeoAdjuvantChemoToxicityForm, 'mammography')
 nact_toxicity_db.connect(url)
-nact_toxicity_crudprint = construct_crudprint('nact_toxicity', nact_toxicity_db, folder_db)
+nact_toxicity_crudprint = construct_crudprint(
+    'nact_toxicity', nact_toxicity_db, folder_db)
 app.register_blueprint(nact_toxicity_crudprint, url_prefix="/nact_toxicity")
 
-mammo_db = SectionDb(log, MammographyForm, 'mammo')
+mammo_db = SectionDb(log, MammographyForm, 'mammography')
 mammo_db.connect(url)
-mammo_crudprint = construct_crudprint('mammo', mammo_db, folder_db)
+mammo_crudprint = construct_crudprint('mammography', mammo_db, folder_db)
 app.register_blueprint(mammo_crudprint, url_prefix="/mammo")
 
 mammo_mass_db = SectionDb(log, MammoMassForm, 'mammo_mass')
 mammo_mass_db.connect(url)
-mammo_mass_crudprint = construct_crudprint('mammo_mass', mammo_mass_db, folder_db)
+mammo_mass_crudprint = construct_crudprint(
+    'mammography_mass', mammo_mass_db, folder_db)
 app.register_blueprint(mammo_mass_crudprint, url_prefix="/mammo_mass")
 
-mammo_calcification_db = SectionDb(log, MammoCalcificationForm, 'mammo_calcification')
+mammo_calcification_db = SectionDb(
+    log, MammoCalcificationForm, 'mammo_calcification')
 mammo_calcification_db.connect(url)
-mammo_calcification_crudprint = construct_crudprint('mammo_calcification', mammo_calcification_db, folder_db)
-app.register_blueprint(mammo_calcification_crudprint, url_prefix="/mammo_calcification")
+mammo_calcification_crudprint = construct_crudprint(
+    'mammo_calcification', mammo_calcification_db, folder_db)
+app.register_blueprint(mammo_calcification_crudprint,
+                       url_prefix="/mammo_calcification")
 
 usg_db = SectionDb(log, SonoMammographyForm, 'sono_mammography')
 usg_db.connect(url)
@@ -92,7 +97,8 @@ app.register_blueprint(usg_crudprint, url_prefix="/usg")
 
 usg_mass_db = SectionDb(log, SonoMammoMassForm, 'sonomammography_mass')
 usg_mass_db.connect(url)
-usg_mass_crudprint = construct_crudprint('sonomammography_mass', usg_mass_db, folder_db)
+usg_mass_crudprint = construct_crudprint(
+    'sonomammography_mass', usg_mass_db, folder_db)
 app.register_blueprint(usg_mass_crudprint, url_prefix="/usg_mass")
 
 pathological_reports_db = SectionDb(log, BiopsyForm, 'pathological_reports')
@@ -142,13 +148,17 @@ app.register_blueprint(post_surgery_complication_surgery_crudprint, url_prefix="
 #
 #########################################################
 # Login, registration and index
+
+
 @app.route('/')
 def index():
     return render_template('home.html')
 
+
 @app.route('/about')
 def about():
     return render_template('about.html')
+
 
 class RegisterForm(Form):
     name = StringField('Name', [validators.Length(min=1, max=50)])
@@ -168,7 +178,7 @@ def register():
         name = form.name.data
         email = form.email.data
         username = form.username.data
-        password = sha256_crypt.encrypt(str(form.password.data))
+        password = sha256_crypt.hash(str(form.password.data))
 
         if users_db.add_user(name, email, username, password):
             flash('You are now registered and can log in', 'success')
@@ -201,6 +211,7 @@ def login():
         return name
     return render_template('login.html')
 
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -215,13 +226,15 @@ def logout():
 def dashboard():
     folder_list = db.get_folders()
     if folder_list:
-        return render_template('dashboard.html', folders = folder_list)
+        return render_template('dashboard.html', folders=folder_list)
     else:
         msg = 'No data found'
-        return render_template('dashboard.html', msg = msg)
+        return render_template('dashboard.html', msg=msg)
 
 #########################################################
     # Folder CRUD
+
+
 ######################
 # Folder
 @app.route('/search', methods=['POST'])
@@ -257,8 +270,10 @@ def view_folder(folder_pk):
     folder_sections = []
     if active_tab_id == "Radiology":
         folder_sections = [
-            create_folder_section(folder_pk, "mammo","mammo", mammo_db.get_folder_items),
-            create_folder_section(folder_pk,  "mammo_mass","mammo_mass", mammo_mass_db.get_folder_items, is_list=True),
+            create_folder_section(folder_pk, "mammo",
+                                  "mammo", mammo_db.get_folder_items),
+            create_folder_section(folder_pk,  "mammo_mass", "mammo_mass",
+                                  mammo_mass_db.get_folder_items, is_list=True),
             create_folder_section(folder_pk,  "mammo_calcification", "mammo_calcification",
                                   mammo_calcification_db.get_folder_items, is_list=True),
             create_folder_section(folder_pk,  "usg", "usg", usg_db.get_folder_items),
@@ -283,8 +298,10 @@ def view_folder(folder_pk):
         ]
     elif active_tab_id == "NACT":
         folder_sections = [
-            create_folder_section(folder_pk, "nact", "nact", nact_db.get_folder_items),
-            create_folder_section(folder_pk, "nact_drug", "nact_drug", nact_drug_db.get_folder_items, is_list=True),
+            create_folder_section(folder_pk, "nact", "nact",
+                                  nact_db.get_folder_items),
+            create_folder_section(
+                folder_pk, "nact_drug", "nact_drug", nact_drug_db.get_folder_items, is_list=True),
             create_folder_section(folder_pk, "nact_toxicity", "nact_toxicity", nact_toxicity_db.get_folder_items,
                                   is_list=True), ]
     elif active_tab_id =="Surgery":
@@ -295,7 +312,7 @@ def view_folder(folder_pk):
                                   post_surgery_complication_surgery_db.get_folder_items, is_list=True)
             ]
 
-    folder_tabs = [        
+    folder_tabs = [
         ("PatientHistory", "Patient History"),
         ("ClinicalExam", "Clinical Exam"),
         ("Radiology", "Radiology"),
@@ -308,8 +325,9 @@ def view_folder(folder_pk):
         ("FollowUp", "Follow-up"),
     ]
 
-    return render_template('folder_tabs.html', folder_number = folder_number, key = folder_pk,
-                            folder_sections=folder_sections, folder_tabs=folder_tabs, active_tab_id=active_tab_id)
+    key = folder_pk
+    return render_template('folder_tabs.html', folder_number=folder_number, key=folder_pk, folder_sections=folder_sections,
+                           folder_tabs=folder_tabs, active_tab_id=active_tab_id)
 
 def create_folder_section(folder_pk, id, section_name, db_get, is_list=False):
     forms = db_get(folder_pk)

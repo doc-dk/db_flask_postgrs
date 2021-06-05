@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField,SelectField,HiddenField
+from wtforms import StringField, TextAreaField, SelectField, HiddenField
 from datetime import datetime
 from db_dict.common_dict import CommonDict
 
@@ -23,14 +23,14 @@ class BsonWrapper:
         return None
 
 
-def to_bson(form, prefix = 'fld_'):
-    
+def to_bson(form, prefix='fld_'):
+
     # handle 'other' fields (_other suffix)
-    other_list = [x for x in dir(form) if x.endswith('_other')]
+    other_list = [x for x in dir(form) if x.endswith('other')]
     for other in other_list:
-        if  form[other[:-len('_other')]].data != 'other':
-            form[other].data = form[other[:-len('_other')]].data
-    
+        if form[other[:-len('_other')]].data != 'other':
+            form[other].data = form[other[:-6]].data
+
     # handle normal fields (prefix fld_)
     field_list = [a for a in dir(form) if a.startswith(prefix)]
     bson = {}
@@ -45,7 +45,7 @@ def to_bson(form, prefix = 'fld_'):
                 result = True
             value = result
         # handle dates!
-        if o.type  == "DateField":
+        if o.type == "DateField":
             value = datetime.combine(value, datetime.min.time())
         bson[key] = value
 
@@ -57,7 +57,8 @@ def to_bson(form, prefix = 'fld_'):
 
     return bson
 
-def from_bson(form, p, prefix = "fld_"):
+
+def from_bson(form, p, prefix="fld_"):
     if p is None:
         return None
 
@@ -94,7 +95,8 @@ class BaseForm(FlaskForm):
     @classmethod
     def append_select_fields(cls, fields):
         for field in fields:
-            setattr(cls, field[0], SelectField(field[1][0], choices=field[1][1]))
+            setattr(cls, field[0], SelectField(
+                field[1][0], choices=field[1][1]))
             setattr(cls, field[0] + "_other", StringField("Other"))
         return cls
 
@@ -102,7 +104,7 @@ class BaseForm(FlaskForm):
 class SectionForm(BaseForm):
     def get_summary(self):
         return self.fld_form_status.data
-    
+
     def from_bson(self, p):
         super().from_bson(p)
         self.last_update.data = p.get_date('last_update')
@@ -114,8 +116,10 @@ class SectionForm(BaseForm):
     fld_folder_pk = HiddenField()
     last_update = HiddenField()
     update_by = HiddenField()
-    fld_form_status = SelectField("Form Status", choices=CommonDict.form_status_choice)
-    fld_comments= TextAreaField("Any additional comments for data in this form?")
+    fld_form_status = SelectField(
+        "Form Status", choices=CommonDict.form_status_choice)
+    fld_comments = TextAreaField(
+        "Any additional comments for data in this form?")
 
     def to_bson(self, update_by):
         bson = super().to_bson()

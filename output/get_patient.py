@@ -1,4 +1,6 @@
 import pymongo
+import pandas as pd
+
 
 def get_patients():
     client = pymongo.MongoClient("localhost", 27017)
