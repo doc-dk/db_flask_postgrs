@@ -23,6 +23,12 @@ class ClinicalExamDict():
                                  'Localised Mastitis':"Localised Mastitis", 'other':"Other"}
     arm_edema_dict = {'tbd':"To be filled",'right':"Right",'left':"Left",'not present':"Not present",'both':"Both",
                       'other':"Other"}
+    usg_abdomen_dict = {'nd':"Not Done",'normal':"Normal",'abnormal':"Abnormal"}
+    cect_abdomen_thorax_dict = {'nd':"Not done",'normal':"Normal",'visceral metastasis':"Visceral Metastasis"}
+    pet_scan_dict = {'nd':"Not Done",'normal':"Normal",'visceral metastasis':"Visceral Metastasis",
+                     'skeletal metastasis':"Skeletal Metastasis"}
+    bone_scan_dict = {'nd':"Not Done",'normal':"Normal", 'skeletal metastasis':"Skeletal Metastasis"}
+
 
     palpable_choice = CommonDict.generate_choice(palpable_dict)
     lump_size_choice = CommonDict.generate_choice(lump_size_dict)
@@ -34,3 +40,7 @@ class ClinicalExamDict():
     skin_change_type_choice = CommonDict.generate_choice(skin_change_type_dict)
     contalateral_breast_choice = CommonDict.generate_choice(contalateral_breast_dict)
     arm_edema_choice = CommonDict.generate_choice(arm_edema_dict)
+    usg_abdomen_choice = CommonDict.generate_choice(usg_abdomen_dict)
+    cect_abdomen_thorax_choice = CommonDict.generate_choice(cect_abdomen_thorax_dict)
+    pet_scan_choice = CommonDict.generate_choice(pet_scan_dict)
+    bone_scan_choice = CommonDict.generate_choice(bone_scan_dict)

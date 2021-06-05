@@ -19,18 +19,14 @@ class CommonDict():
     breast_location_dict = {'tbd': "To be filled", 'NA': "Not present in this breast", 'uoq': "UOQ", 'uiq': "UIQ",
                             'ucq': "UCQ", 'loq': "LOQ", 'liq': "LIQ", 'lcq': "LCQ", 'coq': "COQ", 'ciq': "CIQ", 'ccq': "CCQ",
                             'other': "Other"}
-    birad_dict = {'tbd': "To be filled", 'NA': "Information not available in this report", "0": "0: Incomplete – Need Additional Imaging Evaluation",
-                  "i": "I: Negative", 'ii': "II: Benign", 'iii': "III: Probably Benign", 'iv': "IV: Suspicious",
-                  'iva': "IVA: Low suspicion for malignancy", 'ivb': "IVB: Moderate suspicion for malignancy",
-                  'ivc': "IVC: High suspicion for malignancy", 'v': "V:  Highly Suggestive of Malignancy", 'other': "Other"}
-    distance_from_nipple_dict = {'tbd': "To be filled", 'NA': "Not Present",
-                                 '<.5': "<0.5 cm", '>0.5': ">0.5 cm", 'other': "Other"}
-    yes_no_dict = {'tbd': "To be filled",
-                   "N": "No", "Y": "Yes", 'other': "Other"}
-    yes_no_other_dict = {'tbd': "To be filled",
-                         "other": "Yes", "N": "No", 'na': 'Data not available'}
-    form_yes_no_dict = {'tbd': "To be filled",
-                        'na': 'Not available in report', "N": "No", "Y": "Yes"}
+    birad_dict = {'tbd':"To be filled",'NA': "Information not available in this report","0":"0: Incomplete – Need Additional Imaging Evaluation",
+                  "i":"I: Negative",'ii':"II: Benign", 'iii':"III: Probably Benign",'iv':"IV: Suspicious",
+                  'iva': "IVA: Low suspicion for malignancy",'ivb': "IVB: Moderate suspicion for malignancy",
+                  'ivc': "IVC: High suspicion for malignancy",'v':"V:  Highly Suggestive of Malignancy", 'other': "Other"}
+    distance_from_nipple_dict = {'tbd':"To be filled",'NA':"Not Present", '<.5': "<0.5 cm", '>0.5': ">0.5 cm", 'other': "Other"}
+    yes_no_dict = {'tbd':"To be filled","N": "No", "Y": "Yes", 'other': "Other"}
+    yes_no_other_dict = {'tbd': "To be filled", "other": "Yes", "N": "No", 'na':'Not done'}
+    form_yes_no_dict ={'tbd':"To be filled",'na':'Not available in report',"N": "No", "Y": "Yes"}
 
     absent_present_dict = {'tbd': "To be filled", 'absent': 'Absent', 'present': 'Present', 'na': "Not mentioned in report",
                            'other': "Other"}
