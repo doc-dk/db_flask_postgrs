@@ -5,8 +5,6 @@ from db_dict.common_dict import CommonDict
 from schema_forms.form_utilities import BaseForm, SectionForm
 
 tbd = 'To be filled'
-<< << << < HEAD
-== == == =
 
 
 class TomosynthesisForm(BaseForm):
@@ -16,9 +14,6 @@ class TomosynthesisForm(BaseForm):
         "Date of Tomosynthesis examination", default=None)
     fld_tomo_acc = StringField("Accession number of Tomosynthesis")
     fld_tomo_commments = TextAreaField("Comments/Notes for Tomosynthesis")
-
-
->>>>>> > db_flask/master
 
 
 class AbvsForm(BaseForm):
@@ -56,13 +51,10 @@ class SonoMammographyForm(SectionForm):
     fld_sonomammography_arch_other = StringField("Other")
 
 
-<< << << < HEAD
-
 fld_sonomammography_vasc = SelectField(
     "Vascularity", choices=MammographyDict.sonomammo_vascularity_choice)
 fld_sonomammography_vasc_other = StringField("Other")
 
-== == == =
 fld_sonomammography_duct = SelectField(
     "Duct Changes", choices=CommonDict.breast_choice)
 fld_sonomammography_duct_other = StringField("Other")
@@ -78,7 +70,6 @@ fld_sonomammography_vasc_other = StringField("Other")
 fld_sonomammography_elast = SelectField(
     "Elasticity assessment", choices=MammographyDict.sonomammo_elast_choice)
 fld_sonomammography_elast_other = StringField("Other")
->>>>>> > db_flask/master
 fld_sonomammography_lymph_intra = TextAreaField(
     "Description of intramammary lymph nodes", default=tbd)
 fld_sonomammography_lymph_ax = SelectField(
@@ -97,12 +88,10 @@ fld_sonomammography_sol_duct_loc = SelectField(
 fld_sonomammography_sol_duct_loc_other = StringField("Other")
 fld_sonomammography_sol_duct_diam = StringField(
     "Diameter of solitary dilated duct (mm)", default=tbd)
-<< << << < HEAD
 
 fld_sonomammography_shear = StringField(
     "Strain and shear wave velocity on elastography type/pattern", default=tbd)
 
-== == == =
 fld_sonomammography_sol_mass = SelectField("Is Intra-ductal solid mass present?",
                                            choices=CommonDict.absent_present_choice)
 fld_sonomammography_sol_mass_other = StringField("Other")
@@ -110,7 +99,7 @@ fld_sonomammography_shear = StringField(
     "Strain and shear wave velocity on elastography type/pattern", default=tbd)
 fld_sonomammography_vtq = StringField(
     "Median Shear Velocity (VTQ) in m/s", default=tbd)
->>>>>> > db_flask/master
+
 fld_sonomammography_other_findings = SelectMultipleField("Are there any other findings?",
                                                          choices=MammographyDict.sonomammo_other_findings_choice)
 fld_sonomammography_other_findings_other = StringField("Other")
@@ -118,11 +107,6 @@ fld_sono_birad = SelectField("Does the report include a BI-RAfD assessment/Diagn
                              choices=CommonDict.birad_choice)
 fld_sono_birad_other = StringField("Other")
 submit_button = SubmitField('Submit Form')
-
-<< << << < HEAD
-
-== == == =
->>>>>> > db_flask/master
 
 
 class SonoMammoMassForm(SectionForm):
@@ -142,9 +126,7 @@ class SonoMammoMassForm(SectionForm):
     fld_sono_mass_shape_other = StringField("Other")
 
 
-<< << << < HEAD
 fld_sono_mass_size = StringField("Mass Dimension in mm:")
-== == == =
 fld_sono_mass_depth = StringField("Depth of mass (cm)", default=tbd)
 fld_sono_mass_dist = StringField("Distance from nipple (cm)", default=tbd)
 fld_sono_pect_dist = StringField(
@@ -152,18 +134,13 @@ fld_sono_pect_dist = StringField(
 fld_sono_mass_orientation = SelectField(
     "Orientation of mass", choices=MammographyDict.sono_orientation_choice)
 fld_sono_mass_orientation_other = StringField("Other")
->>>>>> > db_flask/master
 fld_sono_mass_margin = SelectField(
     "Margin of mass", choices=MammographyDict.sono_mass_margin_choice)
 fld_sono_mass_margin_other = StringField("Other")
 fld_sono_mass_echo = SelectField(
     "Echo pattern of mass", choices=MammographyDict.sono_mass_echo_choice)
 fld_sono_mass_echo_other = StringField("Other")
-<< << << < HEAD
-
-== == == =
 fld_sono_mass_posterior = SelectField(
     "Posterior Acoustic features", choices=MammographyDict.sono_posterior_choice)
 fld_sono_mass_posterior_other = StringField("Other")
->>>>>> > db_flask/master
 submit_button = SubmitField('Submit Form')
