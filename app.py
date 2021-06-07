@@ -199,7 +199,8 @@ def register():
         email = form.email.data
         username = form.username.data
         password = sha256_crypt.hash(str(form.password.data))
-        print(name + 'entered')
+        print(name, email, username, password)
+        # print(name + 'entered')
         if users_db.add_user(name, email, username, password):
             flash('You are now registered and can log in', 'success')
         else:

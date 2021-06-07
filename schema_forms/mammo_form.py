@@ -1,5 +1,4 @@
-from wtforms import StringField, TextAreaField, IntegerField, SelectField, FormField, \
-    SubmitField
+from wtforms import StringField, TextAreaField, IntegerField, SelectField, FormField, SubmitField
 from wtforms.fields.html5 import DateField
 from db_dict.mammography import MammographyDict
 from db_dict.common_dict import CommonDict
@@ -34,7 +33,7 @@ class MammoMassForm(SectionForm):
     fld_density = SelectField(
         "Density of mass", choices=MammographyDict.mammo_mass_density_choice)
     fld_density_other = StringField("Other")
-    submit_button = SubmitField('Submit Form')
+    submit_button = SubmitField('Submit')
 
 
 class MammoCalcificationForm(SectionForm):
@@ -129,8 +128,8 @@ class MammographyForm(SectionForm):
         "Is this the first mammography?", choices=MammographyDict.mammo_details_choice)
     fld_mammo_date = DateField("Date of mammography")
     fld_mammo_accesion = StringField("Accession number of mammography")
-    fld_mammo_number = StringField(
-        "Number of previous mammographies undergone")
+    fld_mammo_number = IntegerField(
+        "Number of previous mammographies undergone", default=0)
     fld_mammo_report_previous = TextAreaField(
         "Report of previous mammography if available")
     fld_mammo_breast_density = SelectField("Breast Density in Mammography",

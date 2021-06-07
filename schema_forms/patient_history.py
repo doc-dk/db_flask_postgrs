@@ -124,7 +124,7 @@ class SymptomsLeftBreastDurationForm(BaseForm):
 
 
 class PatientHistoryForm(SectionForm):
-    fld_med_rec_no = StringField('Medical Record Number', default=tbd)
+    # fld_med_rec_no = StringField('Medical Record Number', default=tbd)
     fld_name = StringField('Name of the patient', default=tbd)
     fld_id_type = StringField('Enter type of ID used', default=tbd)
     fld_id_no = StringField('Identity Number', default=tbd)
