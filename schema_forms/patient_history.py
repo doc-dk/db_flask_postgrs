@@ -1,9 +1,8 @@
-from schema_forms.form_utilities import SectionForm
-from wtforms import StringField, validators, IntegerField, FloatField, SubmitField, SelectField, SelectMultipleField
+from schema_forms.form_utilities import BaseForm, SectionForm
+from wtforms import StringField, IntegerField, FloatField, SubmitField, SelectField, SelectMultipleField
 from datetime import date
 from db_dict.common_dict import CommonDict
 from db_dict.patient_history_dict import PatientHistoryDict
-from schema_forms.form_utilities import SectionForm, BaseForm
 from wtforms.fields.html5 import DateField
 from wtforms import StringField, IntegerField, FloatField, SubmitField, TextAreaField, SelectField, SelectMultipleField,\
     FormField
@@ -124,7 +123,7 @@ class SymptomsLeftBreastDurationForm(BaseForm):
 
 
 class PatientHistoryForm(SectionForm):
-    fld_med_rec_no = StringField('Medical Record Number', default=tbd)
+    # fld_med_rec_no = StringField('Medical Record Number', default=tbd)
     fld_name = StringField('Name of the patient', default=tbd)
     fld_id_type = StringField('Enter type of ID used', default=tbd)
     fld_id_no = StringField('Identity Number', default=tbd)
@@ -142,7 +141,8 @@ class PatientHistoryForm(SectionForm):
     fld_gender_other = StringField('Other')
     fld_age = IntegerField('Current Age (yrs)', default=999)
     # todo format date.today() to dd/mm/yyyy
-    fld_date_of_birth = DateField('Date Of Birth', default=date.today())
+    fld_date_of_birth = DateField(
+        'Date Of Birth', default=date.today())
     fld_place_of_birth = StringField('Place Of Birth', default=tbd)
     fld_height_feet = StringField(
         'Height (in feet eg., 5ft 2in) ', default='0ft 0in')
@@ -168,8 +168,8 @@ class PatientHistoryForm(SectionForm):
     fld_marital_status_other = StringField('Other')
     fld_siblings = SelectField("Siblings", choices=CommonDict.yes_no_choice)
     fld_siblings_other = StringField("Other")
-    fld_sister = IntegerField('Number of sisters', default=999)
-    fld_brother = IntegerField('Number of brothers', default=999)
+    fld_sisters = IntegerField('Number of sisters', default=999)
+    fld_brothers = IntegerField('Number of brothers', default=999)
     fld_child = SelectField("Children", choices=CommonDict.yes_no_choice)
     fld_child_other = StringField("Other")
     fld_daughter = IntegerField('Number of daughters', default=999)
@@ -239,45 +239,6 @@ class PatientHistoryForm(SectionForm):
     fld_annual_income = SelectField(
         "Annual house income is", choices=PatientHistoryDict.annual_income_choice)
     fld_annual_income_other = StringField('Other')
-    submit_button = SubmitField('Submit Form')
-
-
-class PatientHistoryForm(SectionForm):
-    fld_age_diagnosis = IntegerField(
-        'Age at diagnosis (yrs)', [validators.required()])
-    fld_place_birth = StringField('Place of Birth')
-    fld_height_cm = FloatField('Height (in cm)', [validators.required()])
-    fld_weight_kg = FloatField('Weight (in kg)', [validators.required()])
-    fld_diet = SelectField("Diet", choices=PatientHistoryDict.diet_choice)
-    fld_diet_other = StringField("Other")
-    fld_alcohol = SelectField("Alcohol consumption",
-                              choices=CommonDict.yes_no_choice)
-    fld_alcohol_other = StringField("Other")
-    fld_alcohol_age = StringField(
-        "Consumption of alcohol from which age (yrs)")
-    fld_alcohol_quant = StringField("Quantity of alcohol consumed per week")
-    fld_alcohol_duration = StringField("Duration of alcohol consumption")
-    fld_alcohol_comments = StringField(
-        "Additional comments for alcohol consumption")
-    fld_tobacco = SelectField(
-        "Tobacco exposure (Passive and/or Active)", choices=PatientHistoryDict.tobacco_choice)
-    fld_tobacco_type_passive = SelectField("Mode of passive consumption",
-                                           choices=PatientHistoryDict.tobacco_type_passive_choice)
-    fld_tobacco_type_passive_other = StringField('Other')
-    fld_tobacco_type_passive_home = StringField("What is the specific source of passive exposure at home",
-                                                default='None')
-    fld_tobacco_type = SelectMultipleField(
-        "Type of tobacco use", choices=PatientHistoryDict.tobacco_type_choice)
-    fld_tobacco_type_other = StringField("Other")
-    fld_tobacco_age = StringField(
-        "Consumption of tobacco from which age (yrs)")
-    fld_tobacco_freq = StringField("Frequency of tobacco consumption")
-    fld_tobacco_quant = StringField("Quantity of tobacco consumed per week")
-    fld_tobacco_duration = StringField("Duration of tobacco consumption")
-    fld_tobacco_comments = StringField(
-        "Additional comments for tobacco consumption")
-    fld_other_del_habits = StringField(
-        "Other Deleterious Habits (if present give details)")
     submit_button = SubmitField('Submit Form')
 
 

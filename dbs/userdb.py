@@ -29,7 +29,6 @@ class UserDb(object):
                 {'$and': [{"username": username}, {'doc_type': self.doc_type}]})
             if user is not None:
                 return False
-            print(name + 'to be added')
             self.db.insert_one({"name": name, "email": email, "username": username, "password": password,
                                 'doc_type': self.doc_type})
             return True
