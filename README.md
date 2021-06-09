@@ -1,24 +1,11 @@
-build
-```
-docker build -t docdk/bcdb:latest .
-
-```
-
 dev setup
 ```
-conda env create -f conda.yml
+conda env create -f environment.yml
 activate flask_b4
-git clone --branch bootstrap-v4 https://github.com/rakelkar/flask-bootstrap/bootstrap-v4
-cd flask-bootstrap
-pip install -e .
+~/> mkdir logs
+~/logs/> <create file service.logs>
+
 ```
 
 db setup
-1. install mongodb
-2. run mongod!
-
-
-test
-```
-python -m unittest tests.py
-```
+db admin and pwd is hardcoded for pccm cluster on mongoDB Atlast
